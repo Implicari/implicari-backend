@@ -1,0 +1,27 @@
+<style>
+
+    .header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .header__back ~ .header__title {
+        border-left: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .header__back:hover {
+        color: #343a40;
+        text-decoration: none;
+    }
+
+</style>
+
+<header class="header d-flex text-secondary">
+    {% if back_url %}
+        <a class="py-3 px-4 m-0 d-inline-block h3 header__back" href="{{ back_url }}" title="volver">&#10094;</a>
+    {% endif %}
+
+    <div class="py-2 px-4 d-inline-block header__title">
+        <small>{{ subtitle }}</small>
+        <h5 class="m-0">{{ title }}</h5>
+    </div>
+</header>

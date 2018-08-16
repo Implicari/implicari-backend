@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block title %}Curso{% endblock %}
+
+
+{% block menu %}
+    {% if parent.id %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a href="{% url 'parent-delete' classroom.id student.id parent.id %}" class="btn btn-outline-danger btn-sm">eliminar</a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock menu %}
+
+
+{% block content %}
+
+    {% if parent.id %}
+        {% include 'base/header.html' with title='Crear apoderado' subtitle=student back_url=back_url %}
+    {% else %}
+        {% include 'base/header.html' with title='Editar Apoderado' subtitle=student back_url=back_url %}
+    {% endif %}
+
+    <form class="p-4" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <br>
+
+        <p>
+            <button class="btn btn-block btn-success">guardar</button>
+            <a href="{{ student.get_parent_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+        </p>
+    </form>
+
+{% endblock content %}

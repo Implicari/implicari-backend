@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% load humanize %}
+{% load l10n %}
+{% load thumbnail %}
+
+
+{% block title %}Perfil{% endblock %}
+
+
+{% block content %}
+
+    <div class="list-group list-group-flush">
+        <div class="list-group-item list-group-item-action py-2 text-center">
+
+            {% thumbnail user.avatar "100x100" crop="top" as avatar %}
+                <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}" alt="{{ user }}">
+            {% empty %}
+                <img class="rounded" src="https://api.adorable.io/avatars/50/{{ user }}.png" width="50" height="50" alt="{{ user }}">
+            {% endthumbnail %}
+
+        </div>
+
+        <div class="list-group-item list-group-item-action py-2">
+            <small>Nombre</small>
+            <div class="font-weight-bold">{{ user.first_name }}</div>
+        </div>
+
+        <div class="list-group-item list-group-item-action py-2">
+            <small>Apellidos</small>
+            <div class="font-weight-bold">{{ user.last_name }}</div>
+        </div>
+
+        <div class="list-group-item list-group-item-action py-2">
+            <small>Email</small>
+            <div class="font-weight-bold">{{ user.email }}</div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'base/vertical_center.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block title %}Iniciar sesión{% endblock %}
+
+
+{% block content %}
+
+    <div class="p-4">
+
+        <h1 class="text-center"><a href="{% url 'index' %}">ByteRock Classroom</a></h1>
+
+        <br>
+
+        <form method="post" action="{% url 'login' %}">
+
+            {% csrf_token %}
+
+            {% bootstrap_form form show_label=False %}
+
+            <br>
+
+            <button class="btn btn-dark btn-block" type="submit">iniciar sesión</button>
+            <a class="btn btn-outline-dark btn-block" href="{% url 'password_reset' %}">Recuperar contraseña</a>
+
+        </form>
+
+    </div>
+
+{% endblock %}

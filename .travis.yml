@@ -1,0 +1,19 @@
+language: python
+python:
+  - 3.6
+install:
+  - pip install pipenv
+  - pipenv install --system --dev
+script:
+  - flake8
+  - coverage run --source='.' --omit=config/settings/development.py,config/wsgi.py manage.py test -v 2 --settings=config.settings.production
+after_success:
+  - coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: rRmGH9b4wAchxQdtL+IHfIQ6McfMpx7g84O4yMHAu65/xtTqC9Q2c4sY1vx7J5bfh/uK/kN6s7wmxOw3hScXwU6YzOrRu7sipQHQ+niyJBuSIbx4t9cMmQNPGeyKmJO8LtEaT0/yMODzU1OazpfQxzpBqfM2JWoklYAEOIqPMP1bY51AX2zQnjfl+x5AEFr42OQYNSq052LnVp0Hy4WShdcZsqGlhEFu55M14kp0sKx7pxUE895zOvzsF1438bKRQxZlTE/0gCkrhxP6mXiNUdrDvqjPMkD5/wy556GWv9SktjCXB2ghvRBc/kEAfPQie9BXzjBTLHT/LRrFADhscMnYizFL9Lu/1GhUNvoa4kQh2qQ20MEdN0sqDVZ1VhXfw9FG0PlHGlVCxvjaSNq77ByvsmIhjFLE5Fx4XB0jZXQGisxFHrJoXgMvPLHaUPtLnmxt3+C3zPcU04iJZCYhsgdty0+erZHXTAy78hsz7Z4EwIctwV0o+impM8ZxezicIK3XFDJyrWtUxHIaeqdK92/LzJ/X9NmJ32FarkuQSwuan5c+QiIOQY3VIg3sD5AJdbeqlApdmSc78HwUFnM1aVPStQR4R8ITfI+8MN97vnhQFgyKIScxkcHcZyR3pgGRAl/79hMySEElVf5XI3DRUWc+LiYFeSZEUwdSm3g7Rh8=
+  app: byterock-classroom-backend
+  on: master
+  run:
+    - python manage.py migrate

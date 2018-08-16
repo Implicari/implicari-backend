@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+
+{% block title %}Curso{% endblock %}
+
+
+{% block menu %}
+
+    {% if classroom.id %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a href="{% url 'classroom-update' classroom.id %}" class="btn btn-outline-secondary btn-sm">editar</a>
+            </li>
+        </ul>
+    {% endif %}
+
+{% endblock menu %}
+
+
+{% block content %}
+
+    {% include 'base/header.html' with title='Curso' subtitle=classroom.name back_url=back_url %}
+
+    <div class="list-group list-group-flush d-flex">
+        <a class="list-group-item list-group-item-action py-2" href="{% url 'post-list' classroom.id %}">
+            Mensajes
+        </a>
+        <a class="list-group-item list-group-item-action py-2" href="{% url 'student-list' classroom.id %}">
+            Estudiantes
+        </a>
+    </div>
+
+{% endblock content %}

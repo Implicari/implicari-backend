@@ -1,0 +1,21 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$IUQOC9VfAmv4$cj+fBTD9kIMYOYglwsKt++6LMVM5vlShd2r0FnaDAXw=",
+        "last_login": "2018-08-14T13:36:49.393Z",
+        "is_superuser": true,
+        "first_name": "Sa\u00fal",
+        "last_name": "Hormaz\u00e1bal",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-03-24T22:12:33Z",
+        "avatar": "fixtures/avatars/saul.jpg",
+        "email": "saul.hormazabal@gmail.com",
+        "groups": [],
+        "user_permissions": [],
+        "parents": []
+    }
+}
+]

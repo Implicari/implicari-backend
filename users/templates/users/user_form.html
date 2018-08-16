@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+{% load thumbnail %}
+
+
+{% block content %}
+
+    <form class="p-4" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% thumbnail user.avatar "100x100" crop="center" as avatar %}
+            <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}">
+        {% empty %}
+            <img class="rounded" src="https://api.adorable.io/avatars/50/{{ user }}.png" width="50" height="50" alt="{{ user }}">
+        {% endthumbnail %}
+
+        {% bootstrap_form form %}
+
+        <br>
+
+        <button class="btn btn-block btn-success" type="submit">guardar</button>
+        <a class="btn btn-block btn-outline-secondary" href="{% url 'login' %}">cancelar</a>
+
+    </form>
+
+{% endblock %}

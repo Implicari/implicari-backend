@@ -1,0 +1,27 @@
+[
+{
+    "model": "classrooms.classroom",
+    "pk": 1,
+    "fields": {
+        "creator": 1,
+        "name": "Kinder",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ]
+    }
+}
+]
