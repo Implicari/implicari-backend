@@ -14,10 +14,22 @@ from .models import Post
 
 class PostMixin:
 
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not (
+            self.classroom.creator == user or
+            self.classroom.students.filter(id=user.id).exists() or
+            self.classroom.students.filter(parents=user).exists()
+        ):
+            return self.handle_no_permission()
+
+        return super().dispatch(request, *args, **kwargs)
+
     @cached_property
     def classroom(self):
         pk = self.kwargs.get('classroom_pk')
-        return get_object_or_404(Classroom, pk=pk, creator=self.request.user)
+        return get_object_or_404(Classroom, pk=pk)
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostMixin, self).get_context_data(*args, **kwargs)

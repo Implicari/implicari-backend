@@ -4,7 +4,7 @@
 {% load bootstrap4 %}
 
 
-{% block title %}Curso{% endblock %}
+{% block title %}Curso - {{ block.super }}{% endblock %}
 
 
 {% block menu %}
@@ -18,26 +18,33 @@
 {% endblock menu %}
 
 
-{% block content %}
+{% block header %}
 
     {% if parent.id %}
-        {% include 'base/header.html' with title='Crear apoderado' subtitle=student back_url=back_url %}
+        {% include 'base/header.html' with title='Editar apoderado' subtitle=student back_url=back_url %}
     {% else %}
-        {% include 'base/header.html' with title='Editar Apoderado' subtitle=student back_url=back_url %}
+        {% include 'base/header.html' with title='Crear apoderado' subtitle=student back_url=back_url %}
     {% endif %}
 
-    <form class="p-4" method="POST" enctype="multipart/form-data">
+{% endblock header %}
 
-        {% csrf_token %}
 
-        {% bootstrap_form form %}
+{% block content %}
 
-        <br>
+    <div class="card">
+        <form class="card-body" method="POST" enctype="multipart/form-data">
 
-        <p>
-            <button class="btn btn-block btn-success">guardar</button>
-            <a href="{{ student.get_parent_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
-        </p>
-    </form>
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <br>
+
+            <p>
+                <button class="btn btn-block btn-success">guardar</button>
+                <a href="{{ student.get_parent_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+            </p>
+        </form>
+    </div>
 
 {% endblock content %}

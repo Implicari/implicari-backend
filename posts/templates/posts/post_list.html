@@ -5,44 +5,67 @@
 {% load l10n %}
 
 
-{% block title %}Gastos{% endblock %}
+{% block title %}Mensajes{% endblock %}
 
 
 {% block menu %}
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
-        </li>
-    </ul>
+
+    {% if classroom.creator == request.user %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
+            </li>
+        </ul>
+    {% endif %}
+
 {% endblock menu %}
+
+
+{% block header %}
+
+    {% include 'base/header.html' with title='Mensajes' subtitle=classroom.name back_url=classroom.get_detail_url %}
+
+{% endblock header %}
 
 
 {% block content %}
 
-    {% include 'classrooms/classroom_summary.html' with classroom=classroom %}
+    <div class="card">
+        {% if posts.exists %}
 
-    {% if posts.exists %}
+            <div class="list-group list-group-flush">
+                {% for post in posts %}
+                    <a class="list-group-item list-group-item-action py-2" href="{{ post.get_detail_url }}">
+                        <div class="d-flex justify-content-between">
+                            <small>{{ post.creator }}</small>
+                            <small>{{ post.creation_timestamp|date }}</small>
+                        </div>
+                        <div class="font-weight-bold">{{ post.subject }}</div>
+                    </a>
+                {% endfor %}
+            </div>
 
-        <div class="list-group list-group-flush">
-            {% for post in posts %}
-                <a class="list-group-item list-group-item-action py-2" href="{{ post.get_detail_url }}">
-                    <div class="d-flex justify-content-between">
-                        <small>{{ post.creator }}</small>
-                        <small>{{ post.creation_timestamp|date }}</small>
-                    </div>
-                    <div class="font-weight-bold">{{ post.subject }}</div>
-                </a>
-            {% endfor %}
-        </div>
+        {% elif classroom.creator == request.user %}
 
-    {% else %}
+            <p class="text-center pt-4">
+                <i class="h1 text-secondary far fa-envelope"></i>
+            </p>
 
-        <p class="display-4 text-secondary text-center pt-5">
-            <a href="{% url 'post-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
-        </p>
+            <p class="text-secondary text-center">
+                <a href="{% url 'post-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
+            </p>
 
-        <p class="text-secondary text-center p-1">Crea tu primer curso</p>
+            <p class="text-secondary text-center pt-1 pb-2">Crea tu primer mensaje</p>
 
-    {% endif %}
+        {% else %}
+
+            <p class="text-center pt-4">
+                <i class="h1 text-secondary far fa-envelope"></i>
+            </p>
+
+            <p class="text-secondary text-center pt-1 pb-2">Aun no tienes mensajes</p>
+
+        {% endif %}
+    </div>
 
 {% endblock content %}

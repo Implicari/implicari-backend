@@ -18,7 +18,7 @@
 {% endblock menu %}
 
 
-{% block content %}
+{% block header %}
 
     {% if student.id %}
         {% include 'base/header.html' with title='Editar estudiante' subtitle=classroom.name back_url=classroom.get_student_list_url %}
@@ -26,7 +26,12 @@
         {% include 'base/header.html' with title='Crear estudiante' subtitle=classroom.name back_url=classroom.get_student_list_url %}
     {% endif %}
 
-    <form class="p-4" method="POST" enctype="multipart/form-data">
+{% endblock header %}
+
+
+{% block content %}
+
+    <form class="card p-4" method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
 

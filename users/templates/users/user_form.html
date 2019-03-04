@@ -5,16 +5,23 @@
 {% load thumbnail %}
 
 
+{% block header %}
+
+{% endblock header %}
+
+
 {% block content %}
 
     <form class="p-4" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% thumbnail user.avatar "100x100" crop="center" as avatar %}
-            <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}">
-        {% empty %}
-            <img class="rounded" src="https://api.adorable.io/avatars/50/{{ user }}.png" width="50" height="50" alt="{{ user }}">
-        {% endthumbnail %}
+        <p class="text-center mb-4">
+            {% thumbnail user.avatar "100x100" crop="center" as avatar %}
+                <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}">
+            {% empty %}
+                <img class="rounded" src="https://api.adorable.io/avatars/50/{{ user }}.png" width="50" height="50" alt="{{ user }}">
+            {% endthumbnail %}
+        </p>
 
         {% bootstrap_form form %}
 

@@ -17,9 +17,8 @@ django-cors-headers = "*"
 "django-bootstrap4" = "*"
 "psycopg2-binary" = "*"
 sorl-thumbnail = "*"
-"psycopg2" = "==2.7.3.2"
 "html2text" = "*"
-django = "*"
+django = ">2.1"
 
 [dev-packages]
 django-extensions = "*"
@@ -30,6 +29,7 @@ coveralls = "*"
 pytest = "*"
 pdbpp = "*"
 pytest-django = "*"
+pywatchman = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"

@@ -53,3 +53,15 @@ class Classroom(models.Model):
 
     def get_student_create_url(self):
         return reverse('student-create', kwargs={'classroom_pk': self.id})
+
+    def get_post_list_url(self):
+        return reverse('post-list', kwargs={'classroom_pk': self.id})
+
+    def get_post_create_url(self):
+        return reverse('post-create', kwargs={'classroom_pk': self.id})
+
+    def get_event_list_url(self):
+        return reverse('event-list', kwargs={'classroom_pk': self.id})
+
+    def get_event_create_url(self):
+        return reverse('event-create', kwargs={'classroom_pk': self.id})

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% load humanize %}
+{% load l10n %}
+
+
+{% block title %}Calendario - {{ block.super }}{% endblock %}
+
+
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="{% url 'event-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
+        </li>
+    </ul>
+{% endblock menu %}
+
+
+{% block header %}
+
+    {% include 'base/header.html' with title='Calendario' subtitle=classroom.name back_url=classroom.get_detail_url %}
+
+{% endblock header %}
+
+
+{% block content %}
+
+    {% if events.exists %}
+
+        <div class="list-group list-group-flush">
+            {% for event in events %}
+                <a class="list-group-item list-group-item-action py-2" href="{{ event.get_detail_url }}">
+                    <div class="d-flex justify-content-between">
+                        <small>{{ event.creator }}</small>
+                        <small>{{ event.creation_timestamp|date }}</small>
+                    </div>
+                    <div class="font-weight-bold">{{ event.description }}</div>
+                </a>
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <p class="display-4 text-secondary text-center pt-5">
+            <a href="{% url 'event-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
+        </p>
+
+        <p class="text-secondary text-center p-1">Crea tu primer evento</p>
+
+    {% endif %}
+
+{% endblock content %}

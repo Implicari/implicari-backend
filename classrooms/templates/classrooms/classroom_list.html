@@ -5,7 +5,7 @@
 {% load l10n %}
 
 
-{% block title %}Gastos{% endblock %}
+{% block title %}Cursos - {{ block.super }}{% endblock %}
 
 
 {% block menu %}
@@ -17,26 +17,31 @@
 {% endblock menu %}
 
 
+{% block header %}
+
+    {% include 'base/header.html' with title='Cursos' subtitle='Lista de cursos' %}
+
+{% endblock header %}
+
+
+
 {% block content %}
 
-    {% if classrooms.exists %}
+    {% if classrooms_teacher.exists or classrooms_parent.exists or classrooms_student.exists %}
 
-        <div class="list-group list-group-flush">
-            {% for classroom in classrooms %}
-                <a class="list-group-item list-group-item-action py-2" href="{{ classroom.get_detail_url }}">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <small>nombre</small>
-                            <div class="font-weight-bold">{{ classroom.name }}</div>
-                        </div>
-                        <div>
-                            <small>estudiantes</small>
-                            <div class="font-weight-bold">{{ classroom.students_amount }}</div>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+        {% if classrooms_teacher.exists %}
+            {% include 'classrooms/classroom_list_content.html' with classrooms=classrooms_teacher title="Profesor" %}
+        {% endif %}
+
+        {% if classrooms_parent.exists %}
+            {% if classrooms_teacher.exists %}<br/>{% endif %}
+            {% include 'classrooms/classroom_list_content.html' with classrooms=classrooms_parent title="Apoderado" %}
+        {% endif %}
+
+        {% if classrooms_student.exists %}
+            {% if classrooms_teacher.exists or classrooms_parent.exists %}<br/>{% endif %}
+            {% include 'classrooms/classroom_list_content.html' with classrooms=classrooms_student title="Estudiante" %}
+        {% endif %}
 
     {% else %}
 

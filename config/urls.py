@@ -16,6 +16,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', index, name='index'),
     path('', include('posts.urls')),
+    path('', include('events.urls')),
     path('', include('students.urls')),
     path('', include('parents.urls')),
     path('cursos/', include('classrooms.urls')),
@@ -36,3 +37,9 @@ if settings.DEBUG:
         urlpatterns = [
             url(r'^__debug__/', include(debug_toolbar.urls)),
         ] + urlpatterns
+
+    else:
+        pass
+
+else:
+    pass

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
 
     'classrooms',
+    'events',
     'parents',
     'posts',
     'students',

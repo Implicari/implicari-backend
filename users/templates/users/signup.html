@@ -1,18 +1,20 @@
-{% extends 'index.html' %}
+{% extends 'users/base.html' %}
 
 
 {% load bootstrap4 %}
 
 
+{% block title %}Registrarse - {{ block.super }}{% endblock %}
+
+
 {% block content %}
 
-    <div class="container-fluid">
+    <div class="py-5 container">
 
-        <h1 class="text-center"><a href="{% url 'index' %}">ByteRock Classroom</a></h1>
-
-        <br>
+        <h1 class="text-center">Registrarse</h1>
 
         <form method="post">
+
             {% csrf_token %}
 
             {% bootstrap_form form show_label=False %}
@@ -20,7 +22,7 @@
             <br>
 
             <button class="btn btn-block btn-dark" type="submit">regístrate</button>
-            <a class="btn btn-block btn-outline-dark" href="{% url 'login' %}">Iniciar sesión</a>
+            <a class="btn btn-block btn-outline-dark" href="{% url 'login' %}">iniciar sesión</a>
 
         </form>
 

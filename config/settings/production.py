@@ -14,6 +14,9 @@ if os.environ.get('IS_SSL_ACTIVE', False):
     SESSION_COOKIE_SECURE = True
     X_FRAME_OPTIONS = 'DENY'
 
+else:
+    pass
+
 DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(' ')

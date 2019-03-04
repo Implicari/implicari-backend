@@ -19,3 +19,6 @@ if os.environ.get('DEBUG_TOOLBAR', False):
     MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
+
+else:
+    pass

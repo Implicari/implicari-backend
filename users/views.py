@@ -35,7 +35,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'user'
     model = User
     fields = [
-        'avatar',
         'email',
         'first_name',
         'last_name',

@@ -17,15 +17,28 @@ User = get_user_model()
 
 class StudentMixin(ClassroomMixin):
 
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not (
+            self.classroom.creator == user or
+            self.classroom.students.filter(id=user.id).exists() or
+            self.classroom.students.filter(parents=user).exists()
+        ):
+            return self.handle_no_permission()
+
+        return super().dispatch(request, *args, **kwargs)
+
     @cached_property
     def classroom(self):
         pk = self.kwargs.get('classroom_pk')
-        return get_object_or_404(Classroom, pk=pk, creator=self.request.user)
+        return get_object_or_404(Classroom, pk=pk)
 
     def get_context_data(self, *args, **kwargs):
         context = super(StudentMixin, self).get_context_data(*args, **kwargs)
 
         context['classroom'] = self.classroom
+        context['back_url'] = self.get_back_url()
 
         return context
 
@@ -35,6 +48,9 @@ class StudentMixin(ClassroomMixin):
     def get_queryset_student(self):
         return self.model.objects.filter(classrooms=self.classroom)
 
+    def get_back_url(self):
+        pass
+
 
 class StudentListView(LoginRequiredMixin, StudentMixin, ListView):
     context_object_name = 'students'
@@ -42,7 +58,21 @@ class StudentListView(LoginRequiredMixin, StudentMixin, ListView):
     template_name = 'students/student_list.html'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('first_name')
+        queryset = super().get_queryset()
+
+        if self.classroom.creator == self.request.user:
+            queryset = queryset.all()
+
+        elif self.classroom.students.filter(id=self.request.user.id).exists():
+            queryset = queryset.filter(id=self.request.user.id)
+
+        elif self.classroom.students.filter(parents=self.request.user).exists():
+            queryset = queryset.filter(parents=self.request.user)
+
+        else:
+            queryset = self.model.objects.none()
+
+        return queryset.order_by('first_name')
 
 
 class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
@@ -50,7 +80,6 @@ class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
     fields = [
         'first_name',
         'last_name',
-        'email',
     ]
     model = User
     template_name = 'students/student_form.html'

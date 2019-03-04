@@ -6,12 +6,17 @@
 {% load i18n %}
 
 
-{% block title %}Gastos{% endblock %}
+{% block title %}Apoderado - {{ block.super }}{% endblock %}
+
+
+{% block header %}
+
+    {% include 'classrooms/classroom_summary.html' with classroom=classroom %}
+
+{% endblock header %}
 
 
 {% block content %}
-
-    {% include 'classrooms/classroom_summary.html' with classroom=classroom %}
 
     <form class="p-4" method="post">
         {% csrf_token %}

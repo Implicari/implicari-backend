@@ -6,10 +6,20 @@ from django.utils.translation import gettext as _
 
 from classrooms.models import Classroom
 
-from .signals import send_email_post_notification
+from .signals import signal_send_email_post
 
 
 User = get_user_model()
+
+
+class PostManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()
+
+
+class PostPendingManager(PostManager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_sent=False)
 
 
 class Post(models.Model):
@@ -19,8 +29,13 @@ class Post(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()
 
+    is_sent = models.BooleanField(default=False)
+
     creation_timestamp = models.DateTimeField(_('creation timestamp'), auto_now_add=True)
     update_timestamp = models.DateTimeField(_('update timestamp'), auto_now=True)
+
+    objects = PostManager()
+    pendings = PostPendingManager()
 
     def __str__(self):
         return f'{self.classroom}: {self.subject}'
@@ -41,4 +56,4 @@ class Post(models.Model):
         return reverse('post-update', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
 
 
-post_save.connect(send_email_post_notification, sender=Post)
+post_save.connect(signal_send_email_post, sender=Post)
