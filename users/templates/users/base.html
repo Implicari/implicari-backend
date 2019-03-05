@@ -6,10 +6,10 @@
 
 {% block head %}
 
-    <title>{% block title %}ByteRock Classroom{% endblock %}</title>
-    <meta name="description" content="Una libreta de comunicaciones online, disponible en todo momento. Una libreta puede ser olvidada en la casa arruinando la comunicación, con ByteRock Classroom ya no pasará eso.">
-    <meta name="og:title" property="og:title" content="ByteRock Classroom">
-    <meta name="og:description" property="og:description" content="Una libreta de comunicaciones online, disponible en todo momento. Una libreta puede ser olvidada en la casa arruinando la comunicación, con ByteRock Classroom ya no pasará eso.">
+    <title>{% block title %}Implicari{% endblock %}</title>
+    <meta name="description" content="Una libreta de comunicaciones online, disponible en todo momento. Una libreta puede ser olvidada en la casa arruinando la comunicación, con Implicari ya no pasará eso.">
+    <meta name="og:title" property="og:title" content="Implicari">
+    <meta name="og:description" property="og:description" content="Una libreta de comunicaciones online, disponible en todo momento. Una libreta puede ser olvidada en la casa arruinando la comunicación, con Implicari ya no pasará eso.">
     <meta name="robots" content="index, follow">
     <link href="classroom.byterock.co" rel="canonical">
 
@@ -56,13 +56,19 @@
 
         <div class="container">
 
-            <h2 class="h1"><a href="{% url 'index' %}">ByteRock Classroom</a></h2>
+            <h2 class="h1"><a href="{% url 'index' %}">Implicari</a></h2>
 
         </div>
 
     </header>
 
-    {% block content %}{% endblock content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 offset-3">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>

@@ -3,7 +3,7 @@
 
 {% block head %}
 
-    <title>ByteRock Classroom</title>
+    <title>Implicari</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
 
@@ -64,19 +64,19 @@
 {% block body %}
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand sidebar-open" href="#" data-target="#sidebar"><span class="badge badge-danger p-2">BR</span></a>
+        <div class="container">
+            <a class="navbar-brand sidebar-open" href="#" data-target="#sidebar"><span class="badge badge-danger p-2">Implicari</span></a>
 
-        <span class="text-white">{{ request.user }}</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbar">
-            {% block menu %}
-                <ul class="navbar-nav ml-auto">
-                </ul>
-            {% endblock menu %}
+            <div class="collapse navbar-collapse" id="navbar">
+                {% block menu %}
+                    <ul class="navbar-nav ml-auto">
+                    </ul>
+                {% endblock menu %}
+            </div>
         </div>
     </nav>
 

@@ -1,4 +1,4 @@
-# ByteRock Classroom Backend
+# Implicari Backend
 
 [![Coverage Status](https://coveralls.io/repos/github/ByteRockCode/classroom-backend/badge.svg?branch=master)](https://coveralls.io/github/ByteRockCode/classroom-backend?branch=master)
 [![Build Status](https://travis-ci.org/ByteRockCode/classroom-backend.svg?branch=master)](https://travis-ci.org/ByteRockCode/classroom-backend)
