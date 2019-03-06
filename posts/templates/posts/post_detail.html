@@ -25,7 +25,7 @@
 
 {% block header %}
 
-    {% include 'base/header.html' with title='Mensajes' subtitle=classroom.name back_url=classroom.get_post_list_url %}
+    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=classroom.get_post_list_url %}
 
 {% endblock header %}
 
@@ -33,6 +33,7 @@
 {% block content %}
 
     <div class="card">
+        <div class="card-header">Mensaje</div>
         <div class="list-group list-group-flush">
             <div class="list-group-item list-group-item-action py-2">
                 <div class="d-flex">

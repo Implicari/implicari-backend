@@ -8,22 +8,9 @@
 {% block title %}Mensajes{% endblock %}
 
 
-{% block menu %}
-
-    {% if classroom.creator == request.user %}
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
-            </li>
-        </ul>
-    {% endif %}
-
-{% endblock menu %}
-
-
 {% block header %}
 
-    {% include 'base/header.html' with title='Mensajes' subtitle=classroom.name back_url=classroom.get_detail_url %}
+    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=classroom.get_detail_url %}
 
 {% endblock header %}
 
@@ -31,6 +18,16 @@
 {% block content %}
 
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center   ">
+                <span>Mensajes</span>
+
+                {% if classroom.creator == request.user %}
+                    <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
+                {% endif %}
+            </div>
+        </div>
+
         {% if posts.exists %}
 
             <div class="list-group list-group-flush">
