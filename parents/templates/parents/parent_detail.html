@@ -9,17 +9,6 @@
 {% block title %}Perfil - {{ block.super }}{% endblock %}
 
 
-{% block menu %}
-
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a href="{% url 'parent-update' classroom.id student.id parent.id %}" class="btn btn-outline-success btn-sm">editar</a>
-        </li>
-    </ul>
-
-{% endblock menu %}
-
-
 {% block header %}
 
     {% include 'base/header.html' with title='Apoderado' subtitle=classroom.name back_url=back_url %}
@@ -30,6 +19,7 @@
 {% block content %}
 
     <div class="card">
+        <div class="card-header">Apoderado</div>
         <div class="list-group list-group-flush">
             <div class="list-group-item list-group-item-action py-2 text-center">
 
@@ -55,24 +45,30 @@
                 <small>Email</small>
                 <div class="font-weight-bold">{{ parent.email|default:'-----' }}</div>
             </div>
+        </div>
+    </div>
 
-            <div class="list-group-item list-group-item-action py-2">
-                <small>Estudiantes</small>
-            </div>
+    <br>
 
-            <div class="list-group-item list-group-item-action py-2">
-                <div>
-                    {% for student in parent.students.all %}
-                        <a href="{% url 'student-detail' classroom.id student.id %}">
-                            {% thumbnail student.avatar "50x50" crop="top" as avatar %}
-                                <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}" alt="{{ student }}">
-                            {% empty %}
-                                <img class="rounded" src="https://api.adorable.io/avatars/50/{{ student }}.png" width="50" height="50" alt="{{ student }}">
-                            {% endthumbnail %}
-                        </a>
-                    {% endfor %}
+    <div class="card">
+        <div class="card-header">Estudiante</div>
+
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action py-2" href="{% url 'parent-detail' classroom.id student.id parent.id %}">
+                <div class="d-flex">
+                    <div>
+                        {% thumbnail student.avatar "50x50" crop="top" as avatar %}
+                            <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}" alt="{{ user }}">
+                        {% empty %}
+                            <img class="rounded" src="https://api.adorable.io/avatars/50/{{ student }}.png" width="50" height="50" alt="{{ student }}">
+                        {% endthumbnail %}
+                    </div>
+                    <div class="pl-2">
+                        <small>Nombre</small>
+                        <div class="font-weight-bold">{{ student.first_name }}</div>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 

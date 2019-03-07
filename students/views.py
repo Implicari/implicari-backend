@@ -1,12 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
-from django.views.generic.list import ListView
 
 from classrooms.models import Classroom
 from classrooms.views import ClassroomMixin
@@ -52,34 +52,12 @@ class StudentMixin(ClassroomMixin):
         pass
 
 
-class StudentListView(LoginRequiredMixin, StudentMixin, ListView):
-    context_object_name = 'students'
-    model = User
-    template_name = 'students/student_list.html'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-
-        if self.classroom.creator == self.request.user:
-            queryset = queryset.all()
-
-        elif self.classroom.students.filter(id=self.request.user.id).exists():
-            queryset = queryset.filter(id=self.request.user.id)
-
-        elif self.classroom.students.filter(parents=self.request.user).exists():
-            queryset = queryset.filter(parents=self.request.user)
-
-        else:
-            queryset = self.model.objects.none()
-
-        return queryset.order_by('first_name')
-
-
 class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
     context_object_name = 'student'
     fields = [
         'first_name',
         'last_name',
+        'email',
     ]
     model = User
     template_name = 'students/student_form.html'
@@ -92,6 +70,9 @@ class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
         return response
 
     def get_success_url(self):
+        return self.classroom.get_student_list_url()
+
+    def get_back_url(self):
         return self.classroom.get_student_list_url()
 
 
@@ -121,3 +102,9 @@ class StudentUpdateView(LoginRequiredMixin, StudentMixin, UpdateView):
 
     def get_success_url(self):
         return self.classroom.get_student_list_url()
+
+    def get_back_url(self):
+        return reverse('student-detail', kwargs={
+            'classroom_pk': self.classroom.id,
+            'pk': self.object.id,
+        })

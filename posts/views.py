@@ -2,8 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from django.views.generic.edit import DeleteView
-from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.utils.functional import cached_property
 
@@ -59,13 +57,6 @@ class PostCreateView(LoginRequiredMixin, PostMixin, CreateView):
         return self.object.get_list_url()
 
 
-class PostDeleteView(LoginRequiredMixin, PostMixin, DeleteView):
-    model = Post
-
-    def get_success_url(self):
-        return self.object.get_list_url()
-
-
 class PostDetailView(LoginRequiredMixin, PostMixin, DetailView):
     model = Post
 
@@ -77,14 +68,3 @@ class PostListView(LoginRequiredMixin, PostMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.select_related('creator').order_by('-creation_timestamp')
-
-
-class PostUpdateView(LoginRequiredMixin, PostMixin, UpdateView):
-    fields = [
-        'subject',
-        'message',
-    ]
-    model = Post
-
-    def get_success_url(self):
-        return self.object.get_list_url()

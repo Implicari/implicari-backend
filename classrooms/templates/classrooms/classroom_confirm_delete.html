@@ -16,21 +16,24 @@
 
 {% block content %}
 
-    <form class="p-4" method="post">
-        {% csrf_token %}
+    <div class="card">
+        <div class="card-header">Eliminar curso</div>
+        <form class="p-4" method="post">
+            {% csrf_token %}
 
-        <input type="hidden" value="{{ object.id }}" name="itemsToDelete" />
+            <input type="hidden" value="{{ classroom.id }}" name="itemsToDelete" />
 
-        <p>El siguiente gasto será eliminado. Estas seguro?</p>
+            <p>El siguiente gasto será eliminado. Estas seguro?</p>
 
-        <div class="alert alert-secondary">{{ expense }}</div>
+            <div class="alert alert-secondary">{{ classroom }}</div>
 
-        <br>
+            <br>
 
-        <p>
-            <button class="btn btn-block btn-danger">eliminar</button>
-            <a href="{{ expense.get_update_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
-        </p>
-    </form>
+            <p>
+                <button class="btn btn-block btn-danger">eliminar</button>
+                <a href="{{ classroom.get_update_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+            </p>
+        </form>
+    </div>
 
 {% endblock content %}

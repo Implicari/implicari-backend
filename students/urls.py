@@ -3,7 +3,6 @@ from django.urls import path
 from .views import StudentCreateView
 from .views import StudentDeleteView
 from .views import StudentDetailView
-from .views import StudentListView
 from .views import StudentUpdateView
 
 
@@ -11,8 +10,6 @@ prefix = 'cursos/<int:classroom_pk>/estudiantes'
 
 
 urlpatterns = [
-    path(f'{prefix}/', StudentListView.as_view(), name='student-list'),
-
     path(
         f'{prefix}/crear/',
         StudentCreateView.as_view(),

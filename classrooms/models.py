@@ -17,7 +17,7 @@ class Classroom(models.Model):
     students = models.ManyToManyField(
         User,
         related_name='classrooms',
-        verbose_name=_('creator'),
+        verbose_name=_('students'),
         blank=True,
     )
 
@@ -49,7 +49,7 @@ class Classroom(models.Model):
         return reverse('classroom-update', kwargs={'pk': self.pk})
 
     def get_student_list_url(self):
-        return reverse('student-list', kwargs={'classroom_pk': self.id})
+        return reverse('classroom-detail', kwargs={'pk': self.id})
 
     def get_student_create_url(self):
         return reverse('student-create', kwargs={'classroom_pk': self.id})

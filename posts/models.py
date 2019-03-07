@@ -37,6 +37,11 @@ class Post(models.Model):
     objects = PostManager()
     pendings = PostPendingManager()
 
+    class Meta:
+        ordering = (
+            'creation_timestamp',
+        )
+
     def __str__(self):
         return f'{self.classroom}: {self.subject}'
 
