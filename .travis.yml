@@ -4,6 +4,7 @@ python:
 install:
   - pip install pipenv
   - pipenv install --system --dev
+  - pipenv uninstall --system psycopg2-binary
 script:
   - flake8
   - coverage run --source='.' --omit=config/settings/development.py,config/wsgi.py manage.py test -v 2 --settings=config.settings.production

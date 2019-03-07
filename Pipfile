@@ -15,10 +15,11 @@ raven = "*"
 dj-database-url = "*"
 django-cors-headers = "*"
 "django-bootstrap4" = "*"
-"psycopg2-binary" = "*"
 sorl-thumbnail = "*"
 "html2text" = "*"
 django = ">2.1"
+psycopg2 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 django-extensions = "*"
