@@ -23,7 +23,7 @@ urlpatterns = [
     ),
 
     path(
-        f'{prefix}/<int:pk>/editar',
+        f'{prefix}/<int:pk>/editar/',
         StudentUpdateView.as_view(),
         name='student-update',
     ),

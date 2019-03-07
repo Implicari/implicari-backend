@@ -51,7 +51,7 @@ class StudentMixin(ClassroomMixin):
         return self.model.objects.filter(classrooms=self.classroom)
 
     def get_back_url(self):
-        pass
+        raise NotImplementedError
 
 
 class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
@@ -68,7 +68,10 @@ class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return self.classroom.get_student_list_url()
+        return reverse('student-detail', kwargs={
+            'classroom_pk': self.classroom.id,
+            'pk': self.object.id,
+        })
 
     def get_back_url(self):
         return self.classroom.get_student_list_url()
@@ -82,11 +85,20 @@ class StudentDeleteView(LoginRequiredMixin, StudentMixin, DeleteView):
     def get_success_url(self):
         return self.classroom.get_student_list_url()
 
+    def get_back_url(self):
+        return reverse('student-detail', kwargs={
+            'classroom_pk': self.classroom.id,
+            'pk': self.object.id,
+        })
+
 
 class StudentDetailView(LoginRequiredMixin, StudentMixin, DetailView):
     context_object_name = 'student'
     model = User
     template_name = 'students/student_detail.html'
+
+    def get_back_url(self):
+        return self.classroom.get_absolute_url()
 
 
 class StudentUpdateView(LoginRequiredMixin, StudentMixin, UpdateView):
@@ -96,7 +108,10 @@ class StudentUpdateView(LoginRequiredMixin, StudentMixin, UpdateView):
     template_name = 'students/student_form.html'
 
     def get_success_url(self):
-        return self.classroom.get_student_list_url()
+        return reverse('student-detail', kwargs={
+            'classroom_pk': self.classroom.id,
+            'pk': self.object.id,
+        })
 
     def get_back_url(self):
         return reverse('student-detail', kwargs={

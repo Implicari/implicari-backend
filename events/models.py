@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 
 from classrooms.models import Classroom
 
-from .signals import send_email_event_notification
+from .signals import signal_send_email_event
 
 
 User = get_user_model()
@@ -43,4 +43,4 @@ class Event(models.Model):
         return reverse('event-update', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
 
 
-post_save.connect(send_email_event_notification, sender=Event)
+post_save.connect(signal_send_email_event, sender=Event)

@@ -26,8 +26,8 @@ class Post(models.Model):
     creator = models.ForeignKey(User, related_name='posts', on_delete=models.DO_NOTHING)
     classroom = models.ForeignKey(Classroom, related_name='posts', on_delete=models.CASCADE)
 
-    subject = models.CharField(max_length=255)
-    message = models.TextField()
+    subject = models.CharField(_('asunto'), max_length=255)
+    message = models.TextField(_('mensaje'))
 
     is_sent = models.BooleanField(default=False)
 
@@ -48,17 +48,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return self.get_update_url()
 
-    def get_delete_url(self):
-        return reverse('post-delete', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
-
     def get_detail_url(self):
         return reverse('post-detail', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
-
-    def get_list_url(self):
-        return reverse('post-list', kwargs={'classroom_pk': self.classroom_id})
-
-    def get_update_url(self):
-        return reverse('post-update', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
 
 
 post_save.connect(signal_send_email_post, sender=Post)

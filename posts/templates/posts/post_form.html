@@ -34,41 +34,33 @@
 {% endblock styles %}
 
 
-{% block menu %}
-    {% if post.id %}
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a href="{% url 'post-delete' classroom.id post.id %}" class="btn btn-outline-danger btn-sm">eliminar</a>
-            </li>
-        </ul>
-    {% endif %}
-{% endblock menu %}
-
-
 {% block header %}
 
-    {% include 'base/header.html' with title='Mensajes' subtitle=classroom.name back_url=classroom.get_post_list_url %}
+    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=classroom.get_post_list_url %}
 
 {% endblock header %}
 
 
 {% block content %}
 
-    <form class="p-4" method="POST">
+    <div class="card">
+        <div class="card-header">Enviar mensaje</div>
+        <form class="p-4" method="POST">
 
-        {% csrf_token %}
+            {% csrf_token %}
 
-        {% bootstrap_form form show_label=False %}
+            {% bootstrap_form form show_label=False %}
 
-        <div id="editor"></div>
+            <div id="editor"></div>
 
-        <br>
+            <br>
 
-        <p>
-            <button class="btn btn-block btn-success">enviar</button>
-            <a href="{{ post.get_detail_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
-        </p>
-    </form>
+            <p>
+                <button class="btn btn-block btn-success">enviar</button>
+                <a href="{{ classroom.get_post_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+            </p>
+        </form>
+    </div>
 
 
 {% endblock content %}

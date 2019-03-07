@@ -35,7 +35,10 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center   ">
                 <span>Mensajes</span>
-                <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
+
+                {% if classroom.id and classroom.creator == request.user %}
+                    <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
+                {% endif %}
             </div>
         </div>
 
@@ -54,13 +57,21 @@
                 </div>
             </div>
 
-        {% else %}
+        {% elif classroom.creator == request.user %}
 
             <p class="display-4 text-secondary text-center pt-5">
-                <a href="{% url 'student-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
+                <a href="{% url 'post-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
             </p>
 
-            <p class="text-secondary text-center p-1">Agrega a tu primer estudiante</p>
+            <p class="text-secondary text-center p-1">Envia a tu primer mensaje</p>
+
+        {% else %}
+
+            <p class="text-center pt-4">
+                <i class="h1 text-secondary far fa-envelope"></i>
+            </p>
+
+            <p class="text-secondary text-center pt-1 pb-2">Aun no tienes mensajes</p>
 
         {% endif %}
     </div>
@@ -71,15 +82,18 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center   ">
                 <span>Estudiantes</span>
-                <a href="{% url 'student-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
+
+                {% if classroom.id and classroom.creator == request.user %}
+                    <a href="{% url 'student-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
+                {% endif %}
             </div>
         </div>
 
-        {% if classroom.students.exists %}
+        {% if students.exists %}
 
             <div class="list-group list-group-flush">
 
-                {% for student in classroom.students.all %}
+                {% for student in students.all %}
                     <a class="list-group-item list-group-item-action py-2" href="{% url 'student-detail' classroom.id student.id %}">
                         <div class="d-flex">
                             <div>

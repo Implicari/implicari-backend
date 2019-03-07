@@ -11,7 +11,7 @@
 
 {% block header %}
 
-    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=classroom.get_student_list_url %}
+    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=back_url %}
 
 {% endblock header %}
 
@@ -88,7 +88,7 @@
                 <a href="{% url 'parent-create' classroom.id student.id %}" class="btn btn-success btn-sm">comenzar</a>
             </p>
 
-            <p class="text-secondary text-center p-1">Agrega apoderado</p>
+            <p class="text-secondary text-center p-1">Agrega un apoderado</p>
 
         {% endif %}
     </div>

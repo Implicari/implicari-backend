@@ -37,7 +37,7 @@ class ClassroomMixin:
         return context
 
     def get_back_url(self):
-        pass
+        raise NotImplementedError
 
 
 class ClassroomListView(LoginRequiredMixin, ClassroomMixin, TemplateView):
@@ -72,6 +72,9 @@ class ClassroomListView(LoginRequiredMixin, ClassroomMixin, TemplateView):
 
         return context
 
+    def get_back_url(self):
+        return None
+
 
 class ClassroomCreateView(LoginRequiredMixin, ClassroomMixin, CreateView):
     model = Classroom
@@ -100,6 +103,9 @@ class ClassroomDeleteView(LoginRequiredMixin, ClassroomMixin, DeleteView):
     def get_success_url(self):
         return self.object.get_list_url()
 
+    def get_back_url(self):
+        return self.object.get_detail_url()
+
 
 class ClassroomDetailView(LoginRequiredMixin, ClassroomMixin, DetailView):
     model = Classroom
@@ -120,9 +126,30 @@ class ClassroomDetailView(LoginRequiredMixin, ClassroomMixin, DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(ClassroomDetailView, self).get_context_data(*args, **kwargs)
 
-        context['back_url'] = reverse('classroom-list')
+        context['students'] = self.get_students()
 
         return context
+
+    def get_back_url(self):
+        return reverse('classroom-list')
+
+    def get_students(self):
+        user = self.request.user
+        classroom = self.get_object()
+
+        if classroom.creator == user:
+            students = classroom.students.all()
+
+        elif classroom.students.filter(id=user.id).exists():
+            students = classroom.students.filter(id=user.id)
+
+        elif classroom.students.filter(parents=user).exists():
+            students = classroom.students.filter(parents=user)
+
+        else:
+            students = classroom.students.none()
+
+        return students
 
 
 class ClassroomUpdateView(LoginRequiredMixin, ClassroomMixin, UpdateView):
@@ -138,9 +165,5 @@ class ClassroomUpdateView(LoginRequiredMixin, ClassroomMixin, UpdateView):
     def get_success_url(self):
         return self.object.get_list_url()
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ClassroomUpdateView, self).get_context_data(*args, **kwargs)
-
-        context['back_url'] = reverse('classroom-detail', kwargs={'pk': self.object.id})
-
-        return context
+    def get_back_url(self):
+        return self.object.get_detail_url()

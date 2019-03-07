@@ -54,7 +54,7 @@ class PostCreateView(LoginRequiredMixin, PostMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return self.object.get_list_url()
+        return self.object.get_detail_url()
 
 
 class PostDetailView(LoginRequiredMixin, PostMixin, DetailView):

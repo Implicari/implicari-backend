@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 
 from classrooms.models import Classroom
@@ -65,16 +64,3 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             url = reverse('classroom-list')
 
         return url
-
-
-class UserCreateView(LoginRequiredMixin, CreateView):
-    model = User
-    fields = [
-        'avatar',
-        'email',
-        'first_name',
-        'last_name',
-    ]
-
-    def get_success_url(self):
-        return self.object.get_detail_url()

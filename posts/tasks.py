@@ -28,7 +28,7 @@ def send_email_post(post):
             message.attach_alternative(content_html, 'text/html')
             messages.append(message)
 
-        connection = mail.get_connection()
+        connection = mail.get_connection(fail_silently=False)
         connection.send_messages(messages)
 
         post.is_sent = True

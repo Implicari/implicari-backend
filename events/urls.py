@@ -26,7 +26,7 @@ urlpatterns = [
     ),
 
     path(
-        f'{prefix}/<int:pk>/editar',
+        f'{prefix}/<int:pk>/editar/',
         EventUpdateView.as_view(),
         name='event-update',
     ),

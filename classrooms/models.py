@@ -34,7 +34,7 @@ class Classroom(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return self.get_update_url()
+        return self.get_detail_url()
 
     def get_delete_url(self):
         return reverse('classroom-delete', kwargs={'pk': self.pk})

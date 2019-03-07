@@ -46,7 +46,7 @@ class ParentMixin:
         return self.model.objects.filter(students=self.student)
 
     def get_back_url(self):
-        pass
+        raise NotImplementedError
 
 
 class ParentCreateView(LoginRequiredMixin, ParentMixin, CreateView):

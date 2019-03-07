@@ -1,0 +1,15 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "creator": 1,
+        "classroom": 1,
+        "subject": "Primer reuni\u00f3n",
+        "message": "Lorem Ipsum",
+        "is_sent": true,
+        "creation_timestamp": "2019-03-07T14:45:28.816Z",
+        "update_timestamp": "2019-03-07T14:45:31.140Z"
+    }
+}
+]

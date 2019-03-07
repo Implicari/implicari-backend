@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -25,9 +24,3 @@ class User(AbstractUser):
         self.email = self.email if self.email else None
 
         return super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return self.get_update_url()
-
-    def get_update_url(self):
-        return reverse('user-update', kwargs={'pk': self.pk})

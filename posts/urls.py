@@ -5,7 +5,7 @@ from .views import PostDetailView
 from .views import PostListView
 
 
-prefix = 'cursos/<int:classroom_pk>/mesnajes'
+prefix = 'cursos/<int:classroom_pk>/mensajes'
 
 
 urlpatterns = [

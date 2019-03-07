@@ -1,0 +1,41 @@
+[
+{
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+        "creator": 1,
+        "classroom": 1,
+        "description": "Prueba de lenguaje",
+        "message": "Lorem Ipsum",
+        "date": "2019-10-24",
+        "creation_timestamp": "2019-03-08T13:18:51.358Z",
+        "update_timestamp": "2019-03-08T13:18:51.358Z"
+    }
+},
+{
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+        "creator": 1,
+        "classroom": 1,
+        "description": "Prueba de lenguaje",
+        "message": "Lorem Ipsum",
+        "date": "2019-10-24",
+        "creation_timestamp": "2019-03-08T13:19:04.913Z",
+        "update_timestamp": "2019-03-08T13:19:04.913Z"
+    }
+},
+{
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+        "creator": 1,
+        "classroom": 1,
+        "description": "Prueba de lenguaje",
+        "message": "Lorem Ipsum",
+        "date": "2019-10-24",
+        "creation_timestamp": "2019-03-08T13:19:42.654Z",
+        "update_timestamp": "2019-03-08T13:19:42.654Z"
+    }
+}
+]
