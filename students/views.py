@@ -11,6 +11,8 @@ from django.views.generic.edit import UpdateView
 from classrooms.models import Classroom
 from classrooms.views import ClassroomMixin
 
+from .forms import StudentForm
+
 
 User = get_user_model()
 
@@ -54,11 +56,7 @@ class StudentMixin(ClassroomMixin):
 
 class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
     context_object_name = 'student'
-    fields = [
-        'first_name',
-        'last_name',
-        'email',
-    ]
+    form_class = StudentForm
     model = User
     template_name = 'students/student_form.html'
 
@@ -93,10 +91,7 @@ class StudentDetailView(LoginRequiredMixin, StudentMixin, DetailView):
 
 class StudentUpdateView(LoginRequiredMixin, StudentMixin, UpdateView):
     context_object_name = 'student'
-    fields = [
-        'first_name',
-        'last_name',
-    ]
+    form_class = StudentForm
     model = User
     template_name = 'students/student_form.html'
 

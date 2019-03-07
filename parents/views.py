@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView
 
 from classrooms.models import Classroom
 
+from .forms import ParentForm
 from .tasks import send_email_parent_invitation
 
 
@@ -50,11 +51,7 @@ class ParentMixin:
 
 class ParentCreateView(LoginRequiredMixin, ParentMixin, CreateView):
     context_object_name = 'parent'
-    fields = [
-        'first_name',
-        'last_name',
-        'email',
-    ]
+    form_class = ParentForm
     model = User
     template_name = 'parents/parent_form.html'
 
