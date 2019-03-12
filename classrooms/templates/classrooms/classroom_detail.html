@@ -81,6 +81,42 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center   ">
+                <span>Preguntas</span>
+                <a href="{% url 'question-create' classroom.id %}" class="btn btn-outline-success btn-sm">preguntar</a>
+            </div>
+        </div>
+
+        {% if classroom.questions.exists %}
+
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action py-2" href="{{ classroom.questions.last.get_detail_url }}">
+                    <div class="d-flex justify-content-between">
+                        <small>{{ classroom.questions.last.creator }}</small>
+                        <!-- <small>{{ classroom.questions.last.creation_timestamp|date }}</small> -->
+                    </div>
+                    <div class="font-weight-bold">{{ classroom.questions.last.subject }}</div>
+                </a>
+                <div class="list-group-item text-right py-2">
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'question-list' classroom.id %}">ver todas &rarr;</a>
+                </div>
+            </div>
+
+        {% else %}
+
+            <p class="display-4 text-secondary text-center pt-2">
+                <a href="{% url 'question-create' classroom.id %}" class="btn btn-success btn-sm">preguntar</a>
+            </p>
+
+            <p class="text-secondary text-center p-1">Envia tu primera pregunta</p>
+
+        {% endif %}
+    </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center   ">
                 <span>Estudiantes</span>
 
                 {% if classroom.id and classroom.creator == request.user %}

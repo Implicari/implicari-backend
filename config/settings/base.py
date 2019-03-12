@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'events',
     'parents',
     'posts',
+    'questions',
     'students',
     'users',
 ]
