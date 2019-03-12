@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block title %}Curso{% endblock %}
+
+
+{% block styles %}
+
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+
+        #{{ form.message.auto_id }} {
+            display: none;
+        }
+
+        .ql-toolbar.ql-snow {
+            border-radius: 0.25rem 0.25rem 0 0;
+        }
+
+        .ql-container {
+            font-size: 1rem;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        }
+
+        .ql-container.ql-snow {
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+
+    </style>
+
+{% endblock styles %}
+
+
+{% block header %}
+
+    {% include 'base/header.html' with title=classroom.name subtitle='Curso' back_url=classroom.get_question_list_url %}
+
+{% endblock header %}
+
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">Enviar pregunta</div>
+        <form class="p-4" method="POST">
+
+            {% csrf_token %}
+
+            {% bootstrap_form form show_label=False %}
+
+            <div id="editor"></div>
+
+            <br>
+
+            <p>
+                <button class="btn btn-block btn-success">enviar</button>
+                <a href="{{ classroom.get_question_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+            </p>
+        </form>
+    </div>
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+
+        var editor = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    // ['link', 'image'],
+                    ['link'],
+                ],
+            }
+        });
+
+        editor.on('text-change', function(delta, source) {
+            $('#{{ form.message.auto_id }}').val($('#editor .ql-editor').html());
+        });
+
+    </script>
+
+{% endblock scripts %}

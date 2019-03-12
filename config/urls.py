@@ -15,10 +15,11 @@ from .views import index
 urlpatterns = [
     path('', include('users.urls')),
     path('', index, name='index'),
-    path('', include('posts.urls')),
     path('', include('events.urls')),
-    path('', include('students.urls')),
     path('', include('parents.urls')),
+    path('', include('posts.urls')),
+    path('', include('questions.urls')),
+    path('', include('students.urls')),
     path('cursos/', include('classrooms.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),

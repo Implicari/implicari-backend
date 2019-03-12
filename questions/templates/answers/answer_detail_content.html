@@ -1,0 +1,22 @@
+{% load thumbnail %}
+
+
+<div class="card mt-1">
+    <div class="card-body py-2 d-flex">
+
+        <div style="width: 50px">
+            {% thumbnail answer.creator.avatar "50x50" crop="top" as avatar %}
+                <img class="rounded" src="{{ avatar.url }}" width="{{ avatar.width }}" height="{{ avatar.height }}" alt="{{ answer.creator }}">
+            {% empty %}
+                <img class="rounded" src="https://api.adorable.io/avatars/50/{{ answer.creator }}asd.png" width="50" height="50" alt="{{ answer.creator }}">
+            {% endthumbnail %}
+        </div>
+
+        <div class="pl-2">
+            <small class="font-weight-bold text-secondary">{{ answer.creator }}</small>
+            <div class="message mb-1">{{ answer.message|safe }}</div>
+            <small class="text-secondary">{{ answer.creation_timestamp }}</small>
+        </div>
+
+    </div>
+</div>
