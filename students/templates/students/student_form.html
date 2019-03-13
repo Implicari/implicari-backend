@@ -29,18 +29,16 @@
 
     <div class="card">
         <div class="card-header">{% if student.id %}Editar{% else %}Crear{% endif %} estudiante</div>
-        <form class="p-4" method="POST" enctype="multipart/form-data">
+        <form class="card-body" method="POST" enctype="multipart/form-data">
 
             {% csrf_token %}
 
             {% bootstrap_form form %}
 
-            <br>
-
-            <p>
-                <button class="btn btn-block btn-success">guardar</button>
-                <a href="{{ classroom.get_student_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
-            </p>
+            <div class="mt-4">
+                <button class="btn btn-block btn-sm btn-dark">guardar</button>
+                <a href="{{ classroom.get_student_list_url }}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
+            </div>
 
         </form>
     </div>

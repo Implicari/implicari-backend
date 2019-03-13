@@ -20,7 +20,7 @@
 
 {% block header %}
 
-    {% include 'base/header.html' with title='Curso' subtitle='Editar' back_url=back_url %}
+    {% include 'base/header.html' with title=form.instance subtitle='Curso' back_url=back_url %}
 
 {% endblock header %}
 
@@ -35,16 +35,14 @@
 
             {% bootstrap_form form %}
 
-            <br>
-
-            <p>
-                <button class="btn btn-block btn-success">guardar</button>
+            <div class="mt-4">
+                <button class="btn btn-block btn-sm btn-success">guardar</button>
                 {% if classroom %}
-                    <a href="{{ classroom.get_detail_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
+                    <a href="{{ classroom.get_detail_url }}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
                 {% else %}
-                    <a href="{% url 'classroom-list' %}" class="btn btn-block btn-outline-secondary">cancelar</a>
+                    <a href="{% url 'classroom-list' %}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
                 {% endif %}
-            </p>
+            </div>
         </form>
     </div>
 

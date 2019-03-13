@@ -28,12 +28,10 @@
 
             {% bootstrap_form form %}
 
-            <br>
-
-            <p>
-                <button class="btn btn-block btn-success">guardar</button>
-                <a href="{{ student.get_parent_list_url }}" class="btn btn-block btn-outline-secondary">cancelar</a>
-            </p>
+            <div class="mt-4">
+                <button class="btn btn-block btn-sm btn-success">guardar</button>
+                <a href="{{ student.get_parent_list_url }}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
+            </div>
         </form>
     </div>
 
