@@ -33,7 +33,7 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center   ">
+            <div class="d-flex justify-content-between align-items-center">
                 <span>Mensajes</span>
 
                 {% if classroom.id and classroom.creator == request.user %}
@@ -59,7 +59,7 @@
 
         {% elif classroom.creator == request.user %}
 
-            <p class="display-4 text-secondary text-center pt-5">
+            <p class="display-4 text-secondary text-center pt-2">
                 <a href="{% url 'post-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
             </p>
 
@@ -80,7 +80,7 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center   ">
+            <div class="d-flex justify-content-between align-items-center">
                 <span>Preguntas</span>
                 <a href="{% url 'question-create' classroom.id %}" class="btn btn-outline-success btn-sm">preguntar</a>
             </div>
@@ -116,7 +116,7 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center   ">
+            <div class="d-flex justify-content-between align-items-center">
                 <span>Estudiantes</span>
 
                 {% if classroom.id and classroom.creator == request.user %}
