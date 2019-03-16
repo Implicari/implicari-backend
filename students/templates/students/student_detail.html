@@ -46,6 +46,13 @@
                 <small>Apellidos</small>
                 <div class="font-weight-bold">{{ student.last_name|default:'-----' }}</div>
             </div>
+
+            {% if student.email %}
+                <div class="list-group-item list-group-item-action py-2">
+                    <small>Email</small>
+                    <div class="font-weight-bold">{{ student.email|default:'-----' }}</div>
+                </div>
+            {% endif %}
         </div>
     </div>
 
