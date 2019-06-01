@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.db.models import Q
 from django.test import Client
 from django.test import override_settings
 
@@ -57,6 +58,20 @@ class QuestionListViewTestCase(StaticLiveServerTestCase):
         response = client.get('/cursos/1/preguntas/', secure=True)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_get_handle_no_permission(self):
+        classroom = Classroom.objects.first()
+        user = User.objects.exclude(
+            Q(classrooms=classroom) |
+            Q(students__classrooms=classroom) |
+            Q(parents__students__classrooms=classroom)
+        ).first()
+
+        client = Client()
+        client.force_login(user)
+        response = client.get(f'/cursos/{classroom.id}/preguntas/', secure=True)
+
+        self.assertEqual(response.status_code, 403)
 
 
 class QuestionCreateViewTestCase(StaticLiveServerTestCase):
