@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
-from django.db.models import Q
 from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
@@ -21,13 +20,6 @@ class ClassroomMixin:
 
     def get_queryset_classroom_student(self):
         return self.model.objects.filter(students=self.request.user)
-
-    def get_queryset_read(self):
-        return self.model.objects.filter(
-            Q(creator=self.request.user) |
-            Q(students__parents=self.request.user) |
-            Q(students=self.request.user)
-        )
 
     def get_context_data(self, *args, **kwargs):
         context = super(ClassroomMixin, self).get_context_data(*args, **kwargs)
@@ -145,9 +137,6 @@ class ClassroomDetailView(LoginRequiredMixin, ClassroomMixin, DetailView):
 
         elif classroom.students.filter(parents=user).exists():
             students = classroom.students.filter(parents=user)
-
-        else:
-            students = classroom.students.none()
 
         return students
 
