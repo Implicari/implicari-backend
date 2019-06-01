@@ -167,3 +167,31 @@ class QuestionDetailViewTestCase(StaticLiveServerTestCase):
         response = client.get(f'/cursos/{classroom.id}/preguntas/1/', secure=True)
 
         self.assertEqual(response.status_code, 403)
+
+
+class QuestionModelTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/questions.fake.json',
+    ]
+
+    def test_pending_manager(self):
+        Question.objects.filter(id=1).update(is_sent=False)
+
+        questions = Question.objects.all()
+        questions_pendings = Question.pendings.all()
+        questions_completed = questions.exclude(id__in=questions_pendings)
+
+        self.assertTrue(questions.exists())
+        self.assertTrue(questions_pendings.exists())
+        self.assertTrue(questions_completed.exists())
+
+        total_pendings_completed = questions_pendings.count() + questions_completed.count()
+        self.assertEqual(questions.count(), total_pendings_completed)
+
+        for question in questions_pendings:
+            self.assertFalse(question.is_sent)
+
+        for question in questions_completed:
+            self.assertTrue(question.is_sent)
