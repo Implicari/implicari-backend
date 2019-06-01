@@ -64,16 +64,13 @@ class ParentCreateView(LoginRequiredMixin, ParentMixin, CreateView):
         form.instance.set_password(password)
         form.instance.save()
 
-        try:
-            send_email_parent_invitation(
-                parent=form.instance,
-                classroom=self.classroom,
-                student=self.student,
-                password=password,
-                base_url=f'{self.request.scheme}://{self.request.get_host()}'
-            )
-        except Exception as e:
-            raise e
+        send_email_parent_invitation(
+            parent=form.instance,
+            classroom=self.classroom,
+            student=self.student,
+            password=password,
+            base_url=f'{self.request.scheme}://{self.request.get_host()}'
+        )
 
         return response
 
