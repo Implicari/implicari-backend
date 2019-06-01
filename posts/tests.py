@@ -151,3 +151,13 @@ class PostModelTestCase(StaticLiveServerTestCase):
 
         for post in posts_completed:
             self.assertTrue(post.is_sent)
+
+    def test_to_string(self):
+        post = Post.objects.first()
+
+        classroom = post.classroom
+
+        self.assertIsNotNone(post.__str__())
+        self.assertNotEqual(post.__str__(), "")
+        self.assertIn(classroom.name, post.__str__())
+        self.assertIn(post.subject, post.__str__())
