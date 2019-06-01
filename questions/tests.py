@@ -205,3 +205,22 @@ class QuestionModelTestCase(StaticLiveServerTestCase):
         self.assertNotEqual(question.__str__(), "")
         self.assertIn(classroom.name, question.__str__())
         self.assertIn(question.subject, question.__str__())
+
+
+class AnswerModelTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/questions.fake.json',
+        'fixtures/answers.fake.json',
+    ]
+
+    def test_to_string(self):
+        answer = Answer.objects.first()
+
+        question = answer.question
+
+        self.assertIsNotNone(answer.__str__())
+        self.assertNotEqual(answer.__str__(), "")
+        self.assertIn(question.subject, answer.__str__())
+        self.assertIn(answer.message, answer.__str__())
