@@ -195,3 +195,13 @@ class QuestionModelTestCase(StaticLiveServerTestCase):
 
         for question in questions_completed:
             self.assertTrue(question.is_sent)
+
+    def test_to_string(self):
+        question = Question.objects.first()
+
+        classroom = question.classroom
+
+        self.assertIsNotNone(question.__str__())
+        self.assertNotEqual(question.__str__(), "")
+        self.assertIn(classroom.name, question.__str__())
+        self.assertIn(question.subject, question.__str__())
