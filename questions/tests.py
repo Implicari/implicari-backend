@@ -6,6 +6,7 @@ from django.test import override_settings
 
 from classrooms.models import Classroom
 
+from .models import Answer
 from .models import Question
 from .tasks import send_email_question
 
@@ -124,6 +125,33 @@ class QuestionDetailViewTestCase(StaticLiveServerTestCase):
         response = client.get('/cursos/1/preguntas/1/', secure=True)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_post_answer(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+
+        question = Question.objects.first()
+        classroom = question.classroom
+
+        client = Client()
+        client.force_login(user)
+
+        self.assertFalse(Answer.objects.exists())
+
+        data = {
+            'subject': 'Lorem',
+            'message': 'Ipsum',
+        }
+
+        url = f'/cursos/{classroom.id}/preguntas/{question.id}/'
+        response = client.post(url, data, secure=True)
+
+        self.assertTrue(Answer.objects.exists())
+
+        self.assertRedirects(
+            response,
+            f'/cursos/{classroom.id}/preguntas/{question.id}/',
+            fetch_redirect_response=False,
+        )
 
     def test_dispatch_no_permission(self):
         email = 'saul.hormazabal@gmail.com'
