@@ -11,5 +11,18 @@
         "creation_timestamp": "2019-03-07T14:45:28.816Z",
         "update_timestamp": "2019-03-07T14:45:31.140Z"
     }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "creator": 1,
+        "classroom": 1,
+        "subject": "Segunda reuni\u00f3n",
+        "message": "Lorem Ipsum",
+        "is_sent": true,
+        "creation_timestamp": "2019-03-09T17:35:28.816Z",
+        "update_timestamp": "2019-03-09T17:35:31.140Z"
+    }
 }
 ]
