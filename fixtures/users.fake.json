@@ -202,9 +202,7 @@
         "email": null,
         "groups": [],
         "user_permissions": [],
-        "parents": [
-            1
-        ]
+        "parents": []
     }
 },
 {
@@ -223,9 +221,7 @@
         "email": null,
         "groups": [],
         "user_permissions": [],
-        "parents": [
-            1
-        ]
+        "parents": []
     }
 },
 {
@@ -244,9 +240,7 @@
         "email": null,
         "groups": [],
         "user_permissions": [],
-        "parents": [
-            1
-        ]
+        "parents": []
     }
 },
 {
@@ -265,9 +259,7 @@
         "email": null,
         "groups": [],
         "user_permissions": [],
-        "parents": [
-            1
-        ]
+        "parents": []
     }
 }
 ]
