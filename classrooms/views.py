@@ -152,7 +152,7 @@ class ClassroomUpdateView(LoginRequiredMixin, ClassroomMixin, UpdateView):
         return self.model.objects.filter(creator=self.request.user)
 
     def get_success_url(self):
-        return self.object.get_list_url()
+        return self.object.get_detail_url()
 
     def get_back_url(self):
         return self.object.get_detail_url()

@@ -135,3 +135,25 @@ class ClassroomUpdateViewTestCase(StaticLiveServerTestCase):
         response = client.get('/cursos/1/editar/', secure=True)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+        classroom = Classroom.objects.first()
+
+        client = Client()
+        client.force_login(user)
+
+        name = 'Lorem'
+
+        self.assertNotEqual(classroom.name, name)
+
+        data = {
+            'name': name,
+        }
+
+        response = client.post(f'/cursos/{classroom.id}/editar/', data, secure=True)
+
+        classroom.refresh_from_db()
+
+        self.assertRedirects(response, f'/cursos/{classroom.id}/', fetch_redirect_response=False)
+        self.assertEqual(classroom.name, name)
