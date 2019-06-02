@@ -124,3 +124,58 @@ class EventDeleteViewTestCase(StaticLiveServerTestCase):
             f'/cursos/{classroom.id}/eventos/',
             fetch_redirect_response=False,
         )
+
+
+class EventUpdateViewTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/events.fake.json',
+    ]
+
+    def test_get(self):
+        client = Client()
+        client.force_login(User.objects.get(email='saul.hormazabal@gmail.com'))
+        response = client.get('/cursos/1/eventos/1/editar/', secure=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+        event = Event.objects.first()
+        classroom = event.classroom
+
+        client = Client()
+        client.force_login(user)
+
+        description = 'Lorem'
+        message = 'Ipsum'
+        date = '2019-06-01'
+
+        assert event.description != description
+        assert event.message != message
+        assert event.date.isoformat() != date
+
+        data = {
+            'description': description,
+            'message': message,
+            'date': date,
+        }
+
+        response = client.post(
+            f'/cursos/{classroom.id}/eventos/{event.id}/editar/',
+            data,
+            secure=True,
+        )
+
+        event.refresh_from_db()
+
+        self.assertRedirects(
+            response,
+            f'/cursos/{classroom.id}/eventos/',
+            fetch_redirect_response=False,
+        )
+
+        self.assertEqual(event.description, description)
+        self.assertEqual(event.message, message)
+        self.assertEqual(event.date.isoformat(), date)
