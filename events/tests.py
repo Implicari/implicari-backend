@@ -179,3 +179,32 @@ class EventUpdateViewTestCase(StaticLiveServerTestCase):
         self.assertEqual(event.description, description)
         self.assertEqual(event.message, message)
         self.assertEqual(event.date.isoformat(), date)
+
+
+class EventModelTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/events.fake.json',
+    ]
+
+    def test_get_absolute_url(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+        event = Event.objects.first()
+
+        client = Client()
+        client.force_login(user)
+
+        response = client.get(event.get_absolute_url(), secure=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_to_string(self):
+        event = Event.objects.first()
+
+        classroom = event.classroom
+
+        self.assertIsNotNone(event.__str__())
+        self.assertNotEqual(event.__str__(), "")
+        self.assertIn(classroom.name, event.__str__())
+        self.assertIn(event.description, event.__str__())
