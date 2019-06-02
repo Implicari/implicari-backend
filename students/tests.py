@@ -27,20 +27,21 @@ class StudentCreateViewTestCase(StaticLiveServerTestCase):
         client = Client()
         client.force_login(user)
 
-        student_ids = list(user.students.values_list('id', flat=True))
+        classroom = Classroom.objects.first()
+        student_ids = list(classroom.students.values_list('id', flat=True))
 
         data = {
             'first_name': 'Lorem',
             'last_name': 'Ipsum',
         }
 
-        response = client.post('/cursos/1/estudiantes/crear/', data, secure=True)
+        response = client.post(f'/cursos/{classroom.id}/estudiantes/crear/', data, secure=True)
 
-        student_created = User.objects.exclude(id__in=student_ids + [user.id]).get()
+        student_created = classroom.students.exclude(id__in=student_ids).get()
 
         self.assertRedirects(
             response,
-            f'/cursos/1/estudiantes/{student_created.id}/',
+            f'/cursos/{classroom.id}/estudiantes/{student_created.id}/',
             fetch_redirect_response=False,
         )
 

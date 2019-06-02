@@ -48,6 +48,34 @@ class ParentCreateViewTestCase(StaticLiveServerTestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+
+        client = Client()
+        client.force_login(user)
+
+        classroom = Classroom.objects.first()
+        student = classroom.students.filter(parents__isnull=True).first()
+
+        self.assertIsInstance(student, User)
+
+        data = {
+            'first_name': 'Lorem',
+            'last_name': 'Ipsum',
+            'email': 'lorem.ipsum@test.com',
+        }
+
+        url = f'/cursos/{classroom.id}/estudiantes/{student.id}/apoderados/crear/'
+        response = client.post(url, data, secure=True)
+
+        self.assertTrue(User.objects.filter(students__in=[student.id]).exists())
+
+        self.assertRedirects(
+            response,
+            f'/cursos/{classroom.id}/estudiantes/{student.id}/',
+            fetch_redirect_response=False,
+        )
+
 
 class ParentDetailViewTestCase(StaticLiveServerTestCase):
     fixtures = [

@@ -45,9 +45,6 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.classroom}: {self.subject}'
 
-    def get_absolute_url(self):
-        return self.get_update_url()
-
     def get_detail_url(self):
         return reverse('post-detail', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
 
