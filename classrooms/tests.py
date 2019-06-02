@@ -87,9 +87,23 @@ class ClassroomDetailViewTestCase(StaticLiveServerTestCase):
         'fixtures/classrooms.fake.json',
     ]
 
-    def test_get(self):
+    def test_get_as_teacher(self):
         client = Client()
-        client.force_login(User.objects.get(email='saul.hormazabal@gmail.com'))
+        client.force_login(User.objects.get(id=1))
+        response = client.get('/cursos/1/', secure=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_as_student(self):
+        client = Client()
+        client.force_login(User.objects.get(id=2))
+        response = client.get('/cursos/1/', secure=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_as_parent(self):
+        client = Client()
+        client.force_login(User.objects.get(id=3))
         response = client.get('/cursos/1/', secure=True)
 
         self.assertEqual(response.status_code, 200)
