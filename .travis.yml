@@ -1,22 +1,23 @@
 dist: xenial
 language: python
 python:
-  - 3.6
+- 3.6
 install:
-  - pip install pipenv
-  - pipenv install --system --dev
-  - pipenv uninstall --system psycopg2-binary
+- pip install pipenv
+- pipenv install --system --dev
+- pipenv uninstall --system psycopg2-binary
 script:
-  - flake8
-  - coverage run --source='.' --omit=config/settings/development.py,config/wsgi.py manage.py test -v 2 --settings=config.settings.production
-  - coverage report --skip-covered -m --fail-under=100
+- flake8
+- coverage run --source='.' --omit=config/settings/development.py,config/wsgi.py manage.py
+  test -v 2 --settings=config.settings.production
+- coverage report --skip-covered -m --fail-under=100
 after_success:
-  - coveralls
+- coveralls
 deploy:
   provider: heroku
   api_key:
-    secure: rRmGH9b4wAchxQdtL+IHfIQ6McfMpx7g84O4yMHAu65/xtTqC9Q2c4sY1vx7J5bfh/uK/kN6s7wmxOw3hScXwU6YzOrRu7sipQHQ+niyJBuSIbx4t9cMmQNPGeyKmJO8LtEaT0/yMODzU1OazpfQxzpBqfM2JWoklYAEOIqPMP1bY51AX2zQnjfl+x5AEFr42OQYNSq052LnVp0Hy4WShdcZsqGlhEFu55M14kp0sKx7pxUE895zOvzsF1438bKRQxZlTE/0gCkrhxP6mXiNUdrDvqjPMkD5/wy556GWv9SktjCXB2ghvRBc/kEAfPQie9BXzjBTLHT/LRrFADhscMnYizFL9Lu/1GhUNvoa4kQh2qQ20MEdN0sqDVZ1VhXfw9FG0PlHGlVCxvjaSNq77ByvsmIhjFLE5Fx4XB0jZXQGisxFHrJoXgMvPLHaUPtLnmxt3+C3zPcU04iJZCYhsgdty0+erZHXTAy78hsz7Z4EwIctwV0o+impM8ZxezicIK3XFDJyrWtUxHIaeqdK92/LzJ/X9NmJ32FarkuQSwuan5c+QiIOQY3VIg3sD5AJdbeqlApdmSc78HwUFnM1aVPStQR4R8ITfI+8MN97vnhQFgyKIScxkcHcZyR3pgGRAl/79hMySEElVf5XI3DRUWc+LiYFeSZEUwdSm3g7Rh8=
-  app: byterock-implicari-backend
+    secure: YfWGIG+JbCqRuh8SE3QBSAlkscRcwQmxlRcERJShk/VAfvguMWBXUnQ3X2eQrTWfNxRPxYBW1FbpDYnAB1DFOl5QudZi7QNSEP/CUfPAmBEXLXCxd6XdE+oLpdQBEDhjLZ685q9y2Rh9ZvV2mTjhUfPJvQuKdhiK+4RiIMXJsBMwcToq/CQ8WJ+3f1IhMxTErTGe60598Ya4K4A+pkrAchVaKnpSsPHSbxIfiDXasQ//y16yyRoQ6yCuq+twXCL1wnLP8ExKEiN0xlrlXWb2brFzlJH6CryaTE0wAm+O9IOnXancIJXq35OZeqEW8D1UvWTBm62tVFg21ZJTkGmw2uVBlSn+f4xqKao6I2RFCPpbN8nN5aMLLQZG35zsx3BgN8krImGDM0Zxc+oAYsS8HMICFM9Nsa95sXd/AYuMqN+4jUZPPYUKm8Jra89grN9obwGbYGeEiG+hNqB/0hqTZCtPWL4ej9xU2mN7wOjtQskpGmwmidO4fiQGTMPuUchhvqTSaep65tOL8sP69kf4lkQLAGlNxEDqsJfqhRqVDRq0lqlT9ETMiLp0ixGZ5D9YQ3lfqm5WUabOLrRcSpNclTpsoQq15/ZyE2PqSVW2jR6HZ7rd7RF2pChAunvINma8NQHbGmPemOKsFejNFGVTehvMm9dphbm9SQYfKyqzaNw=
+  app: implicari-backend
   on: master
   run:
-    - python manage.py migrate
+  - python manage.py migrate
