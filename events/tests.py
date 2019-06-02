@@ -89,3 +89,38 @@ class EventDetailViewTestCase(StaticLiveServerTestCase):
         response = client.get('/cursos/1/eventos/1/', secure=True)
 
         self.assertEqual(response.status_code, 200)
+
+
+class EventDeleteViewTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/events.fake.json',
+    ]
+
+    def test_get(self):
+        client = Client()
+        client.force_login(User.objects.get(email='saul.hormazabal@gmail.com'))
+        response = client.get('/cursos/1/eventos/1/eliminar/', secure=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+        event = Event.objects.first()
+        classroom = event.classroom
+
+        client = Client()
+        client.force_login(user)
+
+        data = {
+        }
+
+        response = client.post(event.get_delete_url(), data, secure=True)
+
+        self.assertFalse(Event.objects.filter(id=event.id).exists())
+        self.assertRedirects(
+            response,
+            f'/cursos/{classroom.id}/eventos/',
+            fetch_redirect_response=False,
+        )
