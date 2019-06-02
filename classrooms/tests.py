@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client
 
+from classrooms.models import Classroom
+
 
 User = get_user_model()
 
@@ -22,7 +24,6 @@ class ClassroomListViewTestCase(StaticLiveServerTestCase):
 class ClassroomCreateViewTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
     ]
 
     def test_get(self):
@@ -31,6 +32,23 @@ class ClassroomCreateViewTestCase(StaticLiveServerTestCase):
         response = client.get('/cursos/crear/', secure=True)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+
+        client = Client()
+        client.force_login(user)
+
+        self.assertFalse(Classroom.objects.exists())
+
+        data = {
+            'name': 'Lorem',
+        }
+
+        response = client.post(f'/cursos/crear/', data, secure=True)
+
+        self.assertTrue(Classroom.objects.exists())
+        self.assertRedirects(response, f'/cursos/', fetch_redirect_response=False)
 
 
 class ClassroomDeleteViewTestCase(StaticLiveServerTestCase):
