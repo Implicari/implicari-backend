@@ -64,6 +64,21 @@ class ClassroomDeleteViewTestCase(StaticLiveServerTestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_post(self):
+        user = User.objects.get(email='saul.hormazabal@gmail.com')
+        classroom = Classroom.objects.first()
+
+        client = Client()
+        client.force_login(user)
+
+        data = {
+        }
+
+        response = client.post(classroom.get_delete_url(), data, secure=True)
+
+        self.assertFalse(Classroom.objects.filter(id=classroom.id).exists())
+        self.assertRedirects(response, f'/cursos/', fetch_redirect_response=False)
+
 
 class ClassroomDetailViewTestCase(StaticLiveServerTestCase):
     fixtures = [
