@@ -124,3 +124,40 @@ class PostDetailViewTestCase(StaticLiveServerTestCase):
         response = client.get(f'/cursos/{classroom.id}/mensajes/1/', secure=True)
 
         self.assertEqual(response.status_code, 403)
+
+
+class PostModelTestCase(StaticLiveServerTestCase):
+    fixtures = [
+        'fixtures/users.fake.json',
+        'fixtures/classrooms.fake.json',
+        'fixtures/posts.fake.json',
+    ]
+
+    def test_pending_manager(self):
+        Post.objects.filter(id=1).update(is_sent=False)
+
+        posts = Post.objects.all()
+        posts_pendings = Post.pendings.all()
+        posts_completed = posts.exclude(id__in=posts_pendings)
+
+        self.assertTrue(posts.exists())
+        self.assertTrue(posts_pendings.exists())
+        self.assertTrue(posts_completed.exists())
+
+        self.assertEqual(posts.count(), posts_pendings.count() + posts_completed.count())
+
+        for post in posts_pendings:
+            self.assertFalse(post.is_sent)
+
+        for post in posts_completed:
+            self.assertTrue(post.is_sent)
+
+    def test_to_string(self):
+        post = Post.objects.first()
+
+        classroom = post.classroom
+
+        self.assertIsNotNone(post.__str__())
+        self.assertNotEqual(post.__str__(), "")
+        self.assertIn(classroom.name, post.__str__())
+        self.assertIn(post.subject, post.__str__())

@@ -45,9 +45,6 @@ class Question(models.Model):
     def __str__(self):
         return f'{self.classroom}: {self.subject}'
 
-    def get_absolute_url(self):
-        return self.get_update_url()
-
     def get_detail_url(self):
         return reverse('question-detail', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
 
@@ -70,16 +67,6 @@ class Answer(models.Model):
 
     def __str__(self):
         return f'{self.question}: {self.message}'
-
-    def get_absolute_url(self):
-        return self.get_update_url()
-
-    def get_detail_url(self):
-        return reverse('answer-detail', kwargs={
-            'classroom_pk': self.question.classroom_id,
-            'question_pk': self.question_id,
-            'pk': self.pk,
-        })
 
 
 post_save.connect(signal_send_email_question, sender=Question)
