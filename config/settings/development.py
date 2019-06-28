@@ -22,3 +22,7 @@ if os.environ.get('DEBUG_TOOLBAR', False):
 
 else:
     pass
+
+GRAPHENE['MIDDLEWARE'] += [
+    'graphene_django.debug.DjangoDebugMiddleware',
+]

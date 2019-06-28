@@ -18,8 +18,8 @@ django-cors-headers = "*"
 sorl-thumbnail = "*"
 "html2text" = "*"
 django = ">2.1"
-psycopg2 = "*"
 psycopg2-binary = "*"
+django-graphql-jwt = "*"
 
 [dev-packages]
 django-extensions = "*"
