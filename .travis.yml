@@ -1,7 +1,14 @@
 dist: xenial
+env:
+  global:
+    - CC_TEST_REPORTER_ID=209614f142819b790e8650e55e455abdfecb4ef18704e059d20bfde6506079e9
 language: python
 python:
 - 3.6
+before_install:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
 install:
 - pip install pipenv
 - pipenv install --system --dev
@@ -13,6 +20,9 @@ script:
 - coverage report --skip-covered -m --fail-under=100
 after_success:
 - coveralls
+after_script:
+  - coverage xml
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
 deploy:
   provider: heroku
   api_key:
