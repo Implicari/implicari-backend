@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Django = "*"
-Pillow = "*"
+Django = "==2.2.9"
+Pillow = "==6.2.0"
 graphene-django = "*"
 bpython = "*"
 django-heroku = "*"
