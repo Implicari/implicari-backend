@@ -9,13 +9,30 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
 import os
+import sys
 import dj_database_url
 
+from os.path import abspath
+from os.path import basename
+from os.path import dirname
+from os.path import join
+from os.path import normpath
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# fetch Django's project directory
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+
+
+# fetch the project_root
+PROJECT_ROOT = dirname(DJANGO_ROOT)
+
+
+# the name of the whole site
+SITE_NAME = basename(DJANGO_ROOT)
+
+
+# add apps/ to the Python path
+sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 
 
 # Quick-start development settings - unsuitable for production
@@ -80,7 +97,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(PROJECT_ROOT, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -143,10 +160,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 ]
 
 
@@ -164,16 +181,20 @@ FIXTURE_DIR = [
 
 
 # Auth
+
 AUTH_USER_MODEL = 'users.User'
+
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = 'classroom-list'
 
 # Google
+
 GOOGLE_ADSENSE_ID = os.environ.get('GOOGLE_ADSENSE_ID')
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
 
 
 # Email
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'notificaciones@implicari.com')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
