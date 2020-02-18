@@ -49,21 +49,39 @@ INTERNAL_IPS = [
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
+SHARED_APPS = [
+    'django_tenants',  # mandatory
+    'schools',  # you must list the app where your tenant model resides in
+
     'django.contrib.contenttypes',
-    'django.contrib.humanize',
+    'django.contrib.sessions',
+    # 'django.contrib.sessions',
+    # 'django.contrib.humanize',
+    # 'django.contrib.staticfiles',
+
+    # 'corsheaders',
+    # 'graphene_django',
+    # 'raven.contrib.django.raven_compat',
+    # 'bootstrap4',
+]
+
+TENANT_APPS = (
+    # The following Django contrib apps must be in TENANT_APPS
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.admin',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
 
+    'sorl.thumbnail',
     'corsheaders',
     'graphene_django',
     'raven.contrib.django.raven_compat',
     'bootstrap4',
-    'sorl.thumbnail',
 
+    # your tenant-specific apps
     'classrooms',
     'events',
     'parents',
@@ -71,13 +89,23 @@ INSTALLED_APPS = [
     'questions',
     'students',
     'users',
-]
+)
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_MODEL = 'schools.School'
+
+TENANT_DOMAIN_MODEL = 'schools.Domain'
+
+PUBLIC_SCHEMA_URLCONF = 'schools.urls'
 
 GRAPHENE = {
     'SCHEMA': 'config.schema.schema',
 }
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -120,8 +148,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ['DATABASE_URL']),
+    'default': {
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'HOST': os.environ['DATABASE_HOST'],
+        'PORT': os.environ['DATABASE_PORT'],
+    },
 }
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 
 # Password validation

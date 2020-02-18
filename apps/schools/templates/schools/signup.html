@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block title %}Conectate a tu escuela - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+    <div class="py-5 container">
+
+        <h1 class="text-center">Conectate a tu escuela</h1>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <br>
+
+            <button class="btn btn-block btn-dark" type="submit">regístrate</button>
+            <a class="btn btn-block btn-outline-dark" href="{% url 'login' %}">iniciar sesión</a>
+
+        </form>
+
+    </div>
+
+{% endblock %}

@@ -20,6 +20,7 @@ sorl-thumbnail = "*"
 django = ">2.1"
 psycopg2 = "*"
 psycopg2-binary = "*"
+django-tenants = "*"
 
 [dev-packages]
 django-extensions = "*"
@@ -31,6 +32,7 @@ pytest = "*"
 pdbpp = "*"
 pytest-django = "*"
 pywatchman = "*"
+pgcli = "*"
 
 [requires]
 python_version = "3.6"
