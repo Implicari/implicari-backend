@@ -18,11 +18,16 @@
             {% csrf_token %}
 
             {% bootstrap_form form %}
+            {% comment %}
+            {% endcomment %}
 
             <br>
 
             <button class="btn btn-block btn-dark" type="submit">regístrate</button>
+
+            {% comment %}
             <a class="btn btn-block btn-outline-dark" href="{% url 'login' %}">iniciar sesión</a>
+            {% endcomment %}
 
         </form>
 
