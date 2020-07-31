@@ -23,11 +23,11 @@ after_success:
 after_script:
   - coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-deploy:
-  provider: heroku
-  api_key:
-    secure: YfWGIG+JbCqRuh8SE3QBSAlkscRcwQmxlRcERJShk/VAfvguMWBXUnQ3X2eQrTWfNxRPxYBW1FbpDYnAB1DFOl5QudZi7QNSEP/CUfPAmBEXLXCxd6XdE+oLpdQBEDhjLZ685q9y2Rh9ZvV2mTjhUfPJvQuKdhiK+4RiIMXJsBMwcToq/CQ8WJ+3f1IhMxTErTGe60598Ya4K4A+pkrAchVaKnpSsPHSbxIfiDXasQ//y16yyRoQ6yCuq+twXCL1wnLP8ExKEiN0xlrlXWb2brFzlJH6CryaTE0wAm+O9IOnXancIJXq35OZeqEW8D1UvWTBm62tVFg21ZJTkGmw2uVBlSn+f4xqKao6I2RFCPpbN8nN5aMLLQZG35zsx3BgN8krImGDM0Zxc+oAYsS8HMICFM9Nsa95sXd/AYuMqN+4jUZPPYUKm8Jra89grN9obwGbYGeEiG+hNqB/0hqTZCtPWL4ej9xU2mN7wOjtQskpGmwmidO4fiQGTMPuUchhvqTSaep65tOL8sP69kf4lkQLAGlNxEDqsJfqhRqVDRq0lqlT9ETMiLp0ixGZ5D9YQ3lfqm5WUabOLrRcSpNclTpsoQq15/ZyE2PqSVW2jR6HZ7rd7RF2pChAunvINma8NQHbGmPemOKsFejNFGVTehvMm9dphbm9SQYfKyqzaNw=
-  app: implicari-backend
-  on: master
-  run:
-  - python manage.py migrate
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: YfWGIG+JbCqRuh8SE3QBSAlkscRcwQmxlRcERJShk/VAfvguMWBXUnQ3X2eQrTWfNxRPxYBW1FbpDYnAB1DFOl5QudZi7QNSEP/CUfPAmBEXLXCxd6XdE+oLpdQBEDhjLZ685q9y2Rh9ZvV2mTjhUfPJvQuKdhiK+4RiIMXJsBMwcToq/CQ8WJ+3f1IhMxTErTGe60598Ya4K4A+pkrAchVaKnpSsPHSbxIfiDXasQ//y16yyRoQ6yCuq+twXCL1wnLP8ExKEiN0xlrlXWb2brFzlJH6CryaTE0wAm+O9IOnXancIJXq35OZeqEW8D1UvWTBm62tVFg21ZJTkGmw2uVBlSn+f4xqKao6I2RFCPpbN8nN5aMLLQZG35zsx3BgN8krImGDM0Zxc+oAYsS8HMICFM9Nsa95sXd/AYuMqN+4jUZPPYUKm8Jra89grN9obwGbYGeEiG+hNqB/0hqTZCtPWL4ej9xU2mN7wOjtQskpGmwmidO4fiQGTMPuUchhvqTSaep65tOL8sP69kf4lkQLAGlNxEDqsJfqhRqVDRq0lqlT9ETMiLp0ixGZ5D9YQ3lfqm5WUabOLrRcSpNclTpsoQq15/ZyE2PqSVW2jR6HZ7rd7RF2pChAunvINma8NQHbGmPemOKsFejNFGVTehvMm9dphbm9SQYfKyqzaNw=
+#   app: implicari-backend
+#   on: master
+#   run:
+#   - python manage.py migrate
