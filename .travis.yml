@@ -2,6 +2,7 @@ dist: xenial
 env:
   global:
     - CC_TEST_REPORTER_ID=93d3ed03586adc6765545ab650975164d077b720cad5e001a03353068b9329fb
+    - CODACY_PROJECT_TOKEN=86904f598f0b4904b4fcdefa1d9e7743
 language: python
 python:
 - 3.6
@@ -23,6 +24,7 @@ after_success:
 after_script:
   - coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh)
 # deploy:
 #   provider: heroku
 #   api_key:
