@@ -1,20 +1,6 @@
-# from django.contrib.auth import get_user_model
-from django.forms import ModelForm
-
-from .models import Domain
-
-# Domain = get_user_model()
+from django.forms import Form
+from django.forms.fields import SlugField
 
 
-class SigninForm(ModelForm):
-
-    class Meta:
-        model = Domain
-        fields = (
-            'domain',
-        )
-
-    def __init__(self, *args, **kwargs):
-        super(SigninForm, self).__init__(*args, **kwargs)
-
-        self.fields['domain'].required = True
+class SigninForm(Form):
+    subdomain = SlugField(required=True)

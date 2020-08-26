@@ -17,9 +17,20 @@
 
             {% csrf_token %}
 
-            {% bootstrap_form form %}
-            {% comment %}
-            {% endcomment %}
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    {% bootstrap_form form layout='inline' %}
+                </div>
+                <div>
+                    <div class="form-control disabled" readonly>
+                        {{ request.get_host }}
+                    </div>
+                </div>
+            </div>
+            
+            {% for error in form.subdomain.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
 
             <br>
 
