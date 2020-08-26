@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import os
 import sys
-import dj_database_url
 
 from os.path import abspath
 from os.path import basename

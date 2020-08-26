@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Django = "==2.2.9"
-Pillow = "==6.2.0"
+Django = "*"
+Pillow = "*"
 graphene-django = "*"
 bpython = "*"
 django-heroku = "*"
@@ -33,6 +33,10 @@ pdbpp = "*"
 pytest-django = "*"
 pywatchman = "*"
 pgcli = "*"
+werkzeug = "*"
+mypy = "*"
+django-stubs = "*"
+flake8-mypy = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"

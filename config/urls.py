@@ -12,7 +12,7 @@ from graphene_django.views import GraphQLView
 from .views import index
 
 
-urlpatterns = [
+urlpatterns: list = [
     path('', include('users.urls')),
     path('', index, name='index'),
     path('', include('events.urls')),

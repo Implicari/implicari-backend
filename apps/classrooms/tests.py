@@ -46,10 +46,10 @@ class ClassroomCreateViewTestCase(StaticLiveServerTestCase):
             'name': 'Lorem',
         }
 
-        response = client.post(f'/cursos/crear/', data, secure=True)
+        response = client.post('/cursos/crear/', data, secure=True)
 
         self.assertTrue(Classroom.objects.exists())
-        self.assertRedirects(response, f'/cursos/', fetch_redirect_response=False)
+        self.assertRedirects(response, '/cursos/', fetch_redirect_response=False)
 
 
 class ClassroomDeleteViewTestCase(StaticLiveServerTestCase):
@@ -78,7 +78,7 @@ class ClassroomDeleteViewTestCase(StaticLiveServerTestCase):
         response = client.post(classroom.get_delete_url(), data, secure=True)
 
         self.assertFalse(Classroom.objects.filter(id=classroom.id).exists())
-        self.assertRedirects(response, f'/cursos/', fetch_redirect_response=False)
+        self.assertRedirects(response, '/cursos/', fetch_redirect_response=False)
 
 
 class ClassroomDetailViewTestCase(StaticLiveServerTestCase):
