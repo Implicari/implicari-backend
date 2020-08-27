@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
-from graphene_django.views import GraphQLView
+from graphene_django.views import GraphQLView  # type: ignore
 
 from .views import index
 
@@ -33,7 +33,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
     if os.environ.get('DEBUG_TOOLBAR', False):
-        import debug_toolbar
+        import debug_toolbar  # type: ignore
 
         urlpatterns = [
             url(r'^__debug__/', include(debug_toolbar.urls)),
