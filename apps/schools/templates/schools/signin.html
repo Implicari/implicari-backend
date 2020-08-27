@@ -27,14 +27,14 @@
                     </div>
                 </div>
             </div>
-            
+
             {% for error in form.subdomain.errors %}
                 <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
 
             <br>
 
-            <button class="btn btn-block btn-dark" type="submit">regístrate</button>
+            <button class="btn btn-block btn-dark" type="submit">continuar</button>
 
             {% comment %}
             <a class="btn btn-block btn-outline-dark" href="{% url 'login' %}">iniciar sesión</a>
