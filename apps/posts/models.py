@@ -23,6 +23,8 @@ class PostPendingManager(PostManager):
 
 
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
+
     creator = models.ForeignKey(User, related_name='posts', on_delete=models.DO_NOTHING)
     classroom = models.ForeignKey(Classroom, related_name='posts', on_delete=models.CASCADE)
 

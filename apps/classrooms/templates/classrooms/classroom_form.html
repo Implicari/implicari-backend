@@ -18,32 +18,27 @@
 {% endblock menu %}
 
 
-{% block header %}
-
-    {% include 'base/header.html' with title=form.instance subtitle='Curso' back_url=back_url %}
-
-{% endblock header %}
-
-
 {% block content %}
 
-    <div class="card">
-        <div class="card-header">{% if classroom.id %}Editar{% else %}Crear{% endif %} curso</div>
+    <div class="col-lg-6 offset-lg-3">
+        <div class="card">
+            <div class="card-header">{% if classroom.id %}Editar{% else %}Crear{% endif %} curso</div>
 
-        <form class="card-body" method="POST">
-            {% csrf_token %}
+            <form class="card-body" method="POST">
+                {% csrf_token %}
 
-            {% bootstrap_form form %}
+                {% bootstrap_form form %}
 
-            <div class="mt-4">
-                <button class="btn btn-block btn-sm btn-success">guardar</button>
-                {% if classroom %}
-                    <a href="{{ classroom.get_detail_url }}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
-                {% else %}
-                    <a href="{% url 'classroom-list' %}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
-                {% endif %}
-            </div>
-        </form>
+                <div class="mt-4">
+                    <button class="btn btn-block btn-sm btn-success">guardar</button>
+                    {% if classroom %}
+                        <a href="{{ classroom.get_detail_url }}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
+                    {% else %}
+                        <a href="{% url 'classroom-list' %}" class="btn btn-block btn-sm btn-outline-secondary">cancelar</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
     </div>
 
 

@@ -18,6 +18,10 @@ from os.path import dirname
 from os.path import join
 from os.path import normpath
 
+from decouple import config
+from decouple import Csv
+
+
 # fetch Django's project directory
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
@@ -37,35 +41,14 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-ALLOWED_HOSTS = [
-    'localhost',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', 'localhost', cast=Csv())
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+INTERNAL_IPS = config('ALLOWED_HOSTS', '127.0.0.1', cast=Csv())
 
 
 # Application definition
 
-SHARED_APPS = [
-    'django_tenants',  # mandatory
-    'schools',  # you must list the app where your tenant model resides in
-
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    # 'django.contrib.sessions',
-    # 'django.contrib.humanize',
-    # 'django.contrib.staticfiles',
-
-    # 'corsheaders',
-    # 'graphene_django',
-    # 'raven.contrib.django.raven_compat',
-    # 'bootstrap4',
-]
-
-TENANT_APPS = (
-    # The following Django contrib apps must be in TENANT_APPS
+INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -80,7 +63,6 @@ TENANT_APPS = (
     'raven.contrib.django.raven_compat',
     'bootstrap4',
 
-    # your tenant-specific apps
     'classrooms',
     'events',
     'parents',
@@ -88,23 +70,12 @@ TENANT_APPS = (
     'questions',
     'students',
     'users',
-)
+    'persons',
+    'courses',
+]
 
-INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
-
-TENANT_MODEL = 'schools.School'
-
-TENANT_DOMAIN_MODEL = 'schools.Domain'
-
-PUBLIC_SCHEMA_URLCONF = 'schools.urls'
-
-GRAPHENE = {
-    'SCHEMA': 'config.schema.schema',
-}
 
 MIDDLEWARE = [
-    'django_tenants.middleware.main.TenantMainMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -149,17 +120,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.environ['DATABASE_NAME'],
-        'USER': os.environ['DATABASE_USER'],
-        'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': os.environ['DATABASE_HOST'],
-        'PORT': os.environ['DATABASE_PORT'],
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
     },
 }
-
-DATABASE_ROUTERS = (
-    'django_tenants.routers.TenantSyncRouter',
-)
 
 
 # Password validation
@@ -241,3 +208,41 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[Implicari]')
+
+
+# Sentry
+
+if config('RAVEN_DSN', None):
+    RAVEN_CONFIG = {
+        'dsn': os.environ.get('RAVEN_DSN'),
+        'environment': os.environ.get('ENV'),
+    }
+
+else:
+    pass
+
+
+# Django extensions
+
+if config('DJANGO_EXTENSIONS_ENABLED', False):
+    INSTALLED_APPS += [
+        'django_extensions',
+    ]
+
+else:
+    pass
+
+
+# Django debug toolbar
+
+if config('DJANGO_DEBUG_TOOLBAR_ENABLED', False):
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
+else:
+    pass

@@ -3,11 +3,15 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from persons.models import Person
+
 
 User = get_user_model()
 
 
 class Classroom(models.Model):
+    id = models.AutoField(primary_key=True)
+
     creator = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
@@ -15,10 +19,16 @@ class Classroom(models.Model):
         verbose_name=_('creator'),
     )
     students = models.ManyToManyField(
-        User,
+        Person,
         related_name='classrooms',
         verbose_name=_('students'),
         blank=True,
+    )
+    head_teacher = models.ForeignKey(
+        Person,
+        on_delete=models.DO_NOTHING,
+        related_name='leaderships',
+        verbose_name=_('head teacher'),
     )
 
     name = models.CharField(_('name'), max_length=255)

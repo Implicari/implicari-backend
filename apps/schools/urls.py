@@ -7,11 +7,15 @@ from django.urls import path
 
 from .views import index
 from .views import signin
+from .views import SchoolListView
 
 
 urlpatterns = [
     path('', index, name='index'),
+    path('', include('users.urls')),
     path('signin/', signin, name='signin'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('schools/', SchoolListView.as_view(), name='school-list'),
 ]
 
 

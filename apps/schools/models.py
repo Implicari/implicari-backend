@@ -5,6 +5,8 @@ from django_tenants.models import TenantMixin
 
 
 class School(TenantMixin):
+    id = models.AutoField(primary_key=True)
+
     name = models.CharField(max_length=100)
     created_on = models.DateField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -13,4 +15,4 @@ class School(TenantMixin):
 
 
 class Domain(DomainMixin):
-    pass
+    id = models.AutoField(primary_key=True)

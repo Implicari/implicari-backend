@@ -23,6 +23,8 @@ class QuestionPendingManager(QuestionManager):
 
 
 class Question(models.Model):
+    id = models.AutoField(primary_key=True)
+
     creator = models.ForeignKey(User, related_name='questions', on_delete=models.DO_NOTHING)
     classroom = models.ForeignKey(Classroom, related_name='questions', on_delete=models.CASCADE)
 
@@ -50,6 +52,8 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    id = models.AutoField(primary_key=True)
+
     creator = models.ForeignKey(User, related_name='answers', on_delete=models.DO_NOTHING)
     question = models.ForeignKey(Question, related_name='answers', on_delete=models.CASCADE)
 

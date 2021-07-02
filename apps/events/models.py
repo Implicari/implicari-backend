@@ -13,6 +13,8 @@ User = get_user_model()
 
 
 class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+
     creator = models.ForeignKey(User, related_name='events', on_delete=models.DO_NOTHING)
     classroom = models.ForeignKey(Classroom, related_name='events', on_delete=models.CASCADE)
 

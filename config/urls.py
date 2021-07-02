@@ -1,5 +1,4 @@
-import os
-
+from decouple import config
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -32,7 +31,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-    if os.environ.get('DEBUG_TOOLBAR', False):
+    if config('DEBUG_TOOLBAR', False):
         import debug_toolbar  # type: ignore
 
         urlpatterns = [

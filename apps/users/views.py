@@ -29,7 +29,7 @@ def signup(request):
 
         login(request, user)
 
-        return redirect('classroom-create')
+        return redirect('school-list')
 
     return render(request, 'users/signup.html', {'form': form})
 
@@ -61,6 +61,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             url = classrooms.get().get_detail_url()
 
         else:
-            url = reverse('classroom-list')
+            url = reverse('school-list')
 
         return url

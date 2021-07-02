@@ -16,10 +16,10 @@ class ClassroomMixin:
         return self.model.objects.filter(creator=self.request.user)
 
     def get_queryset_classroom_parent(self):
-        return self.model.objects.filter(students__parents=self.request.user)
+        return self.model.objects.filter(students__parents=self.request.user.person)
 
     def get_queryset_classroom_student(self):
-        return self.model.objects.filter(students=self.request.user)
+        return self.model.objects.filter(students=self.request.user.person)
 
     def get_context_data(self, *args, **kwargs):
         context = super(ClassroomMixin, self).get_context_data(*args, **kwargs)

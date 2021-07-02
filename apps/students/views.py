@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -11,10 +10,9 @@ from django.views.generic.edit import UpdateView
 from classrooms.models import Classroom
 from classrooms.views import ClassroomMixin
 
+from persons.models import Person
+
 from .forms import StudentForm
-
-
-User = get_user_model()
 
 
 class StudentMixin(ClassroomMixin):
@@ -57,7 +55,7 @@ class StudentMixin(ClassroomMixin):
 class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
     context_object_name = 'student'
     form_class = StudentForm
-    model = User
+    model = Person
     template_name = 'students/student_form.html'
 
     def form_valid(self, form):
@@ -79,7 +77,7 @@ class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
 
 class StudentDeleteView(LoginRequiredMixin, StudentMixin, DeleteView):
     context_object_name = 'student'
-    model = User
+    model = Person
     template_name = 'students/student_confirm_delete.html'
 
     def get_success_url(self):
@@ -94,7 +92,7 @@ class StudentDeleteView(LoginRequiredMixin, StudentMixin, DeleteView):
 
 class StudentDetailView(LoginRequiredMixin, StudentMixin, DetailView):
     context_object_name = 'student'
-    model = User
+    model = Person
     template_name = 'students/student_detail.html'
 
     def get_back_url(self):
@@ -104,7 +102,7 @@ class StudentDetailView(LoginRequiredMixin, StudentMixin, DetailView):
 class StudentUpdateView(LoginRequiredMixin, StudentMixin, UpdateView):
     context_object_name = 'student'
     form_class = StudentForm
-    model = User
+    model = Person
     template_name = 'students/student_form.html'
 
     def get_success_url(self):
