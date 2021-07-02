@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# PDM
+__pypackages__/
+.pdm.toml
+
 # C extensions
 *.so
 
