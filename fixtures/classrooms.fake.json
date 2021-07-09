@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "creator": 1,
-        "name": "Kinder",
+        "name": "PreKinder",
         "is_archived": false,
         "creation_timestamp": "2018-08-14T12:33:35.462Z",
         "update_timestamp": "2018-08-14T14:41:54.029Z",
@@ -20,6 +20,162 @@
             11,
             12
         ]
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 2,
+    "fields": {
+        "creator": 1,
+        "name": "Kinder",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 3,
+    "fields": {
+        "creator": 1,
+        "name": "1º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 4,
+    "fields": {
+        "creator": 1,
+        "name": "2º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 5,
+    "fields": {
+        "creator": 1,
+        "name": "3º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 6,
+    "fields": {
+        "creator": 1,
+        "name": "4º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 7,
+    "fields": {
+        "creator": 1,
+        "name": "5º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 8,
+    "fields": {
+        "creator": 1,
+        "name": "6º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 9,
+    "fields": {
+        "creator": 1,
+        "name": "7º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 10,
+    "fields": {
+        "creator": 1,
+        "name": "8º Básico",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 11,
+    "fields": {
+        "creator": 1,
+        "name": "1º Medio",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 12,
+    "fields": {
+        "creator": 1,
+        "name": "2º Medio",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 13,
+    "fields": {
+        "creator": 1,
+        "name": "3º Medio",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
+    }
+},
+{
+    "model": "classrooms.classroom",
+    "pk": 14,
+    "fields": {
+        "creator": 1,
+        "name": "4º Medio",
+        "is_archived": false,
+        "creation_timestamp": "2018-08-14T12:33:35.462Z",
+        "update_timestamp": "2018-08-14T14:41:54.029Z",
+        "students": []
     }
 }
 ]

@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == '__main__':
-    django_settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'config.settings.development')
+    django_settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'config.settings')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', django_settings_module)
 
     try:

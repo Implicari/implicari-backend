@@ -89,7 +89,7 @@ dependencies = [
     "tabulate[widechars]>=0.8.2",
     "terminaltables>=3.0.0",
     "Pygments>=1.6",
-    "cli-helpers>=2.0.0",
+    "cli-helpers==2.1.0",
 ]
 
 [[package]]
@@ -215,6 +215,15 @@ dependencies = [
     "django",
     "psycopg2",
     "whitenoise",
+]
+
+[[package]]
+name = "django-pgviews"
+sections = ["default"]
+version = "0.5.7"
+summary = "Create and manage Postgres SQL Views in Django"
+dependencies = [
+    "six",
 ]
 
 [[package]]
@@ -676,7 +685,7 @@ extras = ["widechars"]
 summary = "Pretty-print tabular data"
 dependencies = [
     "wcwidth",
-    "tabulate>=0.8.2",
+    "tabulate==0.8.9",
 ]
 
 [[package]]
@@ -735,7 +744,7 @@ summary = "A tool to programmatically control windows inside X"
 
 [metadata]
 lock_version = "2"
-content_hash = "sha256:b7c5bab9ef93f7c5630d46fcbffd623987f946528079f0867120666c7d583cac"
+content_hash = "sha256:ef4afe01c9e826e93f95b358603e3476c7e7fc98ef29201026ca59a9b3d44e0e"
 
 [metadata.files]
 "aniso8601 7.0.0" = [
@@ -914,6 +923,10 @@ content_hash = "sha256:b7c5bab9ef93f7c5630d46fcbffd623987f946528079f0867120666c7
 "django-heroku 0.3.1" = [
     {file = "django_heroku-0.3.1-py2.py3-none-any.whl", hash = "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762"},
     {file = "django-heroku-0.3.1.tar.gz", hash = "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"},
+]
+"django-pgviews 0.5.7" = [
+    {file = "django_pgviews-0.5.7-py3-none-any.whl", hash = "sha256:e305a2a2b42a321eba83ef426d4b76eee778c77e1669f2e1c417eac1d67f5481"},
+    {file = "django-pgviews-0.5.7.tar.gz", hash = "sha256:4388833629b0f208bdb910b80842e7c74aaf0ec098007859ece1bbbd996016ed"},
 ]
 "django-stubs 1.8.0" = [
     {file = "django_stubs-1.8.0-py3-none-any.whl", hash = "sha256:bde9e44e3c4574c2454e74a3e607cc3bc23b0441bb7d1312cd677d5e30984b74"},

@@ -21,6 +21,7 @@ dependencies = [
     "html2text",
     "django-tenants",
     "python-decouple~=3.4",
+    "django-pgviews~=0.5",
 ]
 dev-dependencies = [
     "django-extensions~=3.1",

@@ -1,0 +1,137 @@
+[
+{
+    "model": "persons.person",
+    "pk": 1,
+    "fields": {
+        "first_name": "Admin",
+        "last_name": "Istrador",
+        "run": 0
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 2,
+    "fields": {
+        "first_name": "Álvaro",
+        "last_name": "Álvarez",
+        "run": 11111111
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 3,
+    "fields": {
+        "first_name": "Benito",
+        "last_name": "Benítez",
+        "run": 22222222
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 4,
+    "fields": {
+        "first_name": "Domingo",
+        "last_name": "Domínguez",
+        "run": 33333333
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 5,
+    "fields": {
+        "first_name": "Fernando",
+        "last_name": "Fernández",
+        "run": 44444444
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 6,
+    "fields": {
+        "first_name": "Gonzalo",
+        "last_name": "Gonzáles",
+        "run": 55555555
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 7,
+    "fields": {
+        "first_name": "Henrique",
+        "last_name": "Henríquez",
+        "run": 66666666
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 8,
+    "fields": {
+        "first_name": "Hernán",
+        "last_name": "Hernández",
+        "run": 77777777
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 9,
+    "fields": {
+        "first_name": "Marcos",
+        "last_name": "Márquez",
+        "run": 88888888
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 10,
+    "fields": {
+        "first_name": "Martín",
+        "last_name": "Martínez",
+        "run": 99999999
+    }
+},
+{
+    "model": "persons.person",
+    "pk":11,
+    "fields": {
+        "first_name": "Ramiro",
+        "last_name": "Ramírez",
+        "run": 12121212
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 12,
+    "fields": {
+        "first_name": "Rodrigo",
+        "last_name": "Rodríguez",
+        "run": 23232323
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 13,
+    "fields": {
+        "first_name": "Sancho",
+        "last_name": "Sánchez",
+        "run": 34343434
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 14,
+    "fields": {
+        "first_name": "Inocencio",
+        "last_name": "Jirafales",
+        "run": 45454545
+    }
+},
+{
+    "model": "persons.person",
+    "pk": 15,
+    "fields": {
+        "first_name": "Robert",
+        "last_name": "Simmons",
+        "run": 56565656
+    }
+}
+]
