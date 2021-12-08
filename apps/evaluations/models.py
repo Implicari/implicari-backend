@@ -8,7 +8,6 @@ from persons.models import Person
 
 
 def get_default_order(*args, **kwargs):
-    breakpoint()
     return 1
 
 
@@ -86,29 +85,6 @@ DELIVERY_STATUS_SQL = """
     INNER JOIN persons_person P ON (P.id = CS.person_id)
     LEFT JOIN evaluations_delivery D ON (D.evaluation_id = E.id AND D.student_id = P.id)
 """
-
-
-class DeliveryStatus(pg.View):
-    id = models.AutoField(primary_key=True)
-
-    evaluation = models.ForeignKey(
-        to=Evaluation,
-        related_name='deliveries_status',
-        on_delete=models.CASCADE,
-    )
-
-    student = models.ForeignKey(
-            to=Person,
-        related_name='deliveries_status',
-        on_delete=models.CASCADE,
-    )
-
-    is_delivered = models.BooleanField()
-
-    sql = DELIVERY_STATUS_SQL
-
-    class Meta:
-        managed = False
 
 
 class Question(models.Model):

@@ -26,6 +26,11 @@ class Event(models.Model):
     creation_timestamp = models.DateTimeField(_('creation timestamp'), auto_now_add=True)
     update_timestamp = models.DateTimeField(_('update timestamp'), auto_now=True)
 
+    class Meta:
+        ordering = (
+            'date',
+        )
+
     def __str__(self):
         return f'{self.classroom}: {self.description}'
 

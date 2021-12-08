@@ -107,7 +107,7 @@ class ClassroomDetailView(LoginRequiredMixin, ClassroomMixin, DetailView):
         classroom = self.get_object()
 
         if not (
-            classroom.creator == user or
+            classroom.creator_id == user.id or
             classroom.students.filter(id=user.id).exists() or
             classroom.students.filter(parents=user).exists()
         ):
@@ -129,7 +129,7 @@ class ClassroomDetailView(LoginRequiredMixin, ClassroomMixin, DetailView):
         user = self.request.user
         classroom = self.get_object()
 
-        if classroom.creator == user:
+        if classroom.creator_id == user.id:
             students = classroom.students.all()
 
         elif classroom.students.filter(id=user.id).exists():

@@ -11,7 +11,7 @@
 
 {% block menu %}
 
-    {% if classroom.id and classroom.creator == request.user %}
+    {% if classroom.id and classroom.creator_id == request.user.id %}
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <a href="{% url 'classroom-update' classroom.id %}" class="btn btn-outline-secondary btn-sm">editar</a>
@@ -44,7 +44,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <span>Estudiantes</span>
 
-                {% if classroom.id and classroom.creator == request.user %}
+                {% if classroom.id and classroom.creator_id == request.user.id %}
                     <a href="{% url 'student-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
                 {% endif %}
             </div>

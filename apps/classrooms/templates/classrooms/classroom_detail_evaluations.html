@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <span>Evaluaciones</span>
 
-            {% if classroom.id and classroom.creator == request.user %}
+            {% if classroom.id and classroom.creator_id == request.user.id %}
                 <a href="{% url 'evaluation-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
             {% endif %}
         </div>

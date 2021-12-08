@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <span>Eventos</span>
 
-            {% if classroom.id and classroom.creator == request.user %}
+            {% if classroom.id and classroom.creator_id == request.user.id %}
                 <a href="{% url 'event-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
             {% endif %}
         </div>
@@ -18,8 +18,8 @@
                 <a class="list-group-item list-group-item-action py-2" href="{% url 'event-detail' classroom.id event.id %}">
                     <div class="d-flex jusify-content-between">
                         <div class="text-center pr-4 text-muted">
-                            <small>#</small>
-                            <div>{{ event.order }}</div>
+                            <div class="h3 mb-0 font-weight-bold">{{ event.date.day }}</div>
+                            <small>{{ event.date|date:"M" }}</small>
                         </div>
                         <div class="flex-grow-1">
                             <small>Nombre</small>
