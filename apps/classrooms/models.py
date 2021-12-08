@@ -18,19 +18,6 @@ class Classroom(models.Model):
         related_name='owner_classrooms',
         verbose_name=_('creator'),
     )
-    students = models.ManyToManyField(
-        Person,
-        related_name='classrooms',
-        verbose_name=_('students'),
-        blank=True,
-    )
-    head_teacher = models.ForeignKey(
-        Person,
-        on_delete=models.DO_NOTHING,
-        related_name='leaderships',
-        verbose_name=_('head teacher'),
-    )
-
     name = models.CharField(_('name'), max_length=255)
     is_archived = models.BooleanField(_('is archived'), default=False)
 

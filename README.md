@@ -69,8 +69,8 @@ pdm run python manage.py migrate
 
 pdm run python manage.py loaddata fixtures/persons.fake.json
 
-pdm run python manage.py create_superuser \
-    --email admin@localhost \
+pdm run python manage.py createsuperuser \
+    --email admin@implicari.local \
     --person_id 1 \
     --password password \
     --no-input

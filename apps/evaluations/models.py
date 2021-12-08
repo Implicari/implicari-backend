@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from django_pgviews import view as pg
 
@@ -30,7 +31,7 @@ class Evaluation(models.Model):
 
     def save(self, *args, **kwargs):
 
-        if self.classroom:
+        if self.classroom and self.order is None:
             evaluation_last = self.classroom.evaluations.last()
 
             if evaluation_last:
@@ -44,6 +45,13 @@ class Evaluation(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return self.get_detail_url()
+
+    def get_detail_url(self):
+        return reverse('evaluation-detail', kwargs={'pk': self.pk, 'classroom_pk': self.classroom_id})
+
+ 
 
 class Delivery(models.Model):
     id = models.AutoField(primary_key=True)
@@ -101,3 +109,29 @@ class DeliveryStatus(pg.View):
 
     class Meta:
         managed = False
+
+
+class Question(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    evaluation = models.ForeignKey(
+        to=Evaluation,
+        related_name='questions',
+        on_delete=models.CASCADE,
+    )
+
+    statement = models.TextField()
+
+
+class Alternative(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    question = models.ForeignKey(
+        to=Question,
+        related_name='alternatives',
+        on_delete=models.CASCADE,
+    )
+
+    text = models.TextField()
+
+    is_correct = models.BooleanField(default=False)

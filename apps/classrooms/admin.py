@@ -8,7 +8,7 @@ class ClassroomAdmin(admin.ModelAdmin):
 
     list_display = (
         'name',
-        'head_teacher',
+        'creator',
         'students_count',
     )
 

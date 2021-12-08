@@ -19,6 +19,7 @@ urlpatterns: list = [
     path('', include('posts.urls')),
     path('', include('questions.urls')),
     path('', include('students.urls')),
+    path('', include('evaluations.urls')),
     path('', include('django.contrib.auth.urls')),
     path('cursos/', include('classrooms.urls')),
     path('admin/', admin.site.urls),

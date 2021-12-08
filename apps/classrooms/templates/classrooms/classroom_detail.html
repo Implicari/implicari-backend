@@ -31,103 +31,11 @@
 
 {% block content %}
 
-    <div class="card">
-        <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <span>Evaluaciones</span>
-
-                {% if classroom.id and classroom.creator == request.user %}
-                    <a href="{% url 'post-create' classroom.id %}" class="btn btn-outline-success btn-sm">crear</a>
-                {% endif %}
-            </div>
-        </div>
-
-        {% if classroom.evaluations.exists %}
-
-            <div class="list-group list-group-flush">
-                {% for evaluation in classroom.evaluations.all %}
-                <a class="list-group-item list-group-item-action py-2" href="{{ classroom.posts.last.get_detail_url }}">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-center pr-4 text-muted">
-                            <small>#</small>
-                            <div>{{ evaluation.order }}</div>
-                        </div>
-                        <div class="flex-grow-1">
-                            <small>Nombre</small>
-                            <div class="font-weight-bold">{{ evaluation.name }}</div>
-                        </div>
-                        <div class="text-center pl-4">
-                            <small>Completadas</small>
-                            <div class="font-weight-bold">2</div>
-                        </div>
-                        <div class="text-center pl-4">
-                            <small>Pendientes</small>
-                            <div class="font-weight-bold text-danger">1</div>
-                        </div>
-                        <div class="text-center pl-4">
-                            <small>Promedio</small>
-                            <div class="font-weight-bold">6.4</div>
-                        </div>
-
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-
-        {% elif classroom.creator == request.user %}
-
-            <p class="display-4 text-secondary text-center pt-2">
-                <a href="{% url 'post-create' classroom.id %}" class="btn btn-success btn-sm">comenzar</a>
-            </p>
-
-            <p class="text-secondary text-center p-1">Crea a tu primera evaluación</p>
-
-        {% else %}
-
-            <p class="text-center pt-4">
-                <i class="h1 text-secondary far fa-envelope"></i>
-            </p>
-
-            <p class="text-secondary text-center pt-1 pb-2">Aun no tienes evaluaciones</p>
-
-        {% endif %}
-    </div>
+    {% include 'classrooms/classroom_detail_events.html' %}
 
     <br>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <span>Material de estudio</span>
-                <a href="{% url 'question-create' classroom.id %}" class="btn btn-outline-success btn-sm">agregar</a>
-            </div>
-        </div>
-
-        {% if classroom.questions.exists %}
-
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action py-2" href="{{ classroom.questions.last.get_detail_url }}">
-                    <div class="d-flex justify-content-between">
-                        <small>{{ classroom.questions.last.creator }}</small>
-                        <!-- <small>{{ classroom.questions.last.creation_timestamp|date }}</small> -->
-                    </div>
-                    <div class="font-weight-bold">{{ classroom.questions.last.subject }}</div>
-                </a>
-                <div class="list-group-item text-right py-2">
-                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'question-list' classroom.id %}">ver todas &rarr;</a>
-                </div>
-            </div>
-
-        {% else %}
-
-            <p class="display-4 text-secondary text-center pt-2">
-                <a href="{% url 'question-create' classroom.id %}" class="btn btn-success btn-sm">preguntar</a>
-            </p>
-
-            <p class="text-secondary text-center p-1">Envia tu primera pregunta</p>
-
-        {% endif %}
-    </div>
+    {% include 'classrooms/classroom_detail_evaluations.html' %}
 
     <br>
 
@@ -156,7 +64,7 @@
 
                             {% for delivery_status in student.deliveries_status.all %}
                                 <div class="text-center pl-4">
-                                    <small># {{ delivery_status.evaluation.order }}</small>
+                                    <small class="text-black-50"># {{ delivery_status.evaluation.order }}</small>
                                     <div class="font-weight-bold">
                                         {% if delivery_status.is_delivered %}
                                             <i class="far fa-check-circle text-success"></i>

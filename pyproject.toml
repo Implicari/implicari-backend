@@ -22,22 +22,8 @@ dependencies = [
     "django-tenants",
     "python-decouple~=3.4",
     "django-pgviews~=0.5",
-]
-dev-dependencies = [
-    "django-extensions~=3.1",
-    "django-debug-toolbar",
-    "coverage",
-    "coveralls",
-    "flake8",
-    "pytest",
-    "pdbpp",
-    "pytest-django",
-    "pywatchman",
-    "pgcli",
-    "werkzeug",
-    "mypy",
-    "django-stubs",
-    "flake8-mypy",
+    "django-mathfilters~=1.0",
+    "django-nested-form-field~=0.0",
 ]
 requires-python = ">=3.8"
 dynamic = ["classifiers"]
@@ -57,3 +43,21 @@ build-backend = "pdm.pep517.api"
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "django-extensions~=3.1",
+    "django-debug-toolbar",
+    "coverage",
+    "coveralls",
+    "flake8",
+    "pytest",
+    "pdbpp",
+    "pytest-django",
+    "pywatchman",
+    "pgcli",
+    "werkzeug",
+    "mypy",
+    "django-stubs",
+    "flake8-mypy",
+]

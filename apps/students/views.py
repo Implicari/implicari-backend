@@ -50,7 +50,7 @@ class StudentMixin(ClassroomMixin):
         return self.get_queryset_student()
 
     def get_queryset_student(self):
-        return self.model.objects.filter(classrooms=self.classroom)
+        return self.model.objects.filter(classroom=self.classroom)
 
     def get_back_url(self):
         raise NotImplementedError
@@ -63,18 +63,11 @@ class StudentCreateView(LoginRequiredMixin, StudentMixin, CreateView):
     template_name = 'students/student_form.html'
 
     def form_valid(self, form):
+        form.instance.classroom = self.classroom
+
         response = super().form_valid(form)
 
-        form.instance.classrooms.add(self.classroom)
-
-        email: str = form.cleaned_data['email']
-        
-        user, _ = User.objects.get_or_create(
-            email=email,
-            defaults={
-                'person': form.instance,
-            },
-        )
+        # form.instance.classrooms.add(self.classroom)
 
         return response
 

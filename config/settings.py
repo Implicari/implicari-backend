@@ -45,7 +45,7 @@ DEBUG = config('DEBUG', False)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', 'localhost', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', 'implicari.local', cast=Csv())
 
 INTERNAL_IPS = config('ALLOWED_HOSTS', '127.0.0.1', cast=Csv())
 
@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'raven.contrib.django.raven_compat',
     'bootstrap4',
+    'mathfilters',
 
     'classrooms',
     'evaluations',

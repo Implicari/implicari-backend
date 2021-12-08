@@ -3,8 +3,6 @@ from django.contrib.auth.models import UserManager as BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from persons.models import Person
-
 
 class UserManager(BaseUserManager):
 
@@ -40,14 +38,6 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
-
-    person = models.OneToOneField(
-        Person,
-        on_delete=models.DO_NOTHING,
-        related_name='user',
-        unique=True,
-        verbose_name=_('person'),
-    )
 
     email = models.EmailField(_('email address'), unique=True)
 
