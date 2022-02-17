@@ -1,0 +1,63 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Saúl Hormazábal", email = "saul.hormazabal@gmail.com"},
+]
+dependencies = [
+    "Django",
+    "Pillow",
+    "graphene-django",
+    "bpython",
+    "django-heroku",
+    "gunicorn",
+    "whitenoise",
+    "raven",
+    "dj-database-url",
+    "django-cors-headers",
+    "django-bootstrap4",
+    "sorl-thumbnail",
+    "html2text",
+    "django-tenants",
+    "python-decouple~=3.4",
+    "django-pgviews~=0.5",
+    "django-mathfilters~=1.0",
+    "django-nested-form-field~=0.0",
+]
+requires-python = ">=3.8"
+dynamic = ["classifiers"]
+license = {text = " "}
+
+[project.urls]
+homepage = ""
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+
+[tool]
+[tool.pdm]
+[[tool.pdm.source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "django-extensions~=3.1",
+    "django-debug-toolbar",
+    "coverage",
+    "coveralls",
+    "flake8",
+    "pytest",
+    "pdbpp",
+    "pytest-django",
+    "pywatchman",
+    "pgcli",
+    "werkzeug",
+    "mypy",
+    "django-stubs",
+    "flake8-mypy",
+]

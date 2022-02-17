@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/
 
 import os
 
+from django.core.handlers.wsgi import WSGIHandler
 from django.core.wsgi import get_wsgi_application
 
-django_settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'config.settings.development')
+django_settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'config.settings')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', django_settings_module)
 
-application = get_wsgi_application()
+application: WSGIHandler = get_wsgi_application()
