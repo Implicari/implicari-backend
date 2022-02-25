@@ -61,10 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.staticfiles',
 
-    'django_pgviews',
     'sorl.thumbnail',
     'corsheaders',
-    'graphene_django',
     'raven.contrib.django.raven_compat',
     'bootstrap4',
     'mathfilters',

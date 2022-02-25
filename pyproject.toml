@@ -8,7 +8,6 @@ authors = [
 dependencies = [
     "Django",
     "Pillow",
-    "graphene-django",
     "bpython",
     "django-heroku",
     "gunicorn",
@@ -20,11 +19,9 @@ dependencies = [
     "sorl-thumbnail",
     "html2text",
     "django-tenants",
-    "python-decouple~=3.4",
-    "django-pgviews~=0.5",
+    "python-decouple",
     "django-mathfilters~=1.0",
-    "django-nested-form-field~=0.0",
-]
+    "django-nested-form-field~=0.0"]
 requires-python = ">=3.8"
 dynamic = ["classifiers"]
 license = {text = " "}

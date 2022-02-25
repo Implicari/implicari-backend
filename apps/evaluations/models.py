@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from django_pgviews import view as pg
-
 from classrooms.models import Classroom
 from persons.models import Person
 
