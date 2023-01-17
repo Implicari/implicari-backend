@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi
+web: gunicorn implicari.config.wsgi

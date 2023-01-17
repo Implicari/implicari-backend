@@ -3,8 +3,7 @@ import os
 import sys
 
 if __name__ == '__main__':
-    django_settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'config.settings')
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', django_settings_module)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'implicari.config.settings')
 
     try:
         from django.core.management import execute_from_command_line

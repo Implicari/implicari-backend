@@ -6,55 +6,25 @@ authors = [
     {name = "Saúl Hormazábal", email = "saul.hormazabal@gmail.com"},
 ]
 dependencies = [
-    "Django",
-    "Pillow",
-    "bpython",
-    "django-heroku",
-    "gunicorn",
-    "whitenoise",
-    "raven",
-    "dj-database-url",
-    "django-cors-headers",
-    "django-bootstrap4",
-    "sorl-thumbnail",
-    "html2text",
-    "django-tenants",
-    "python-decouple",
-    "django-mathfilters~=1.0",
-    "django-nested-form-field~=0.0"]
-requires-python = ">=3.8"
-dynamic = ["classifiers"]
-license = {text = " "}
-
-[project.urls]
-homepage = ""
+    "django>=4.1.3",
+    "django-extensions>=3.2.1",
+    "python-decouple>=3.6",
+    "psycopg2-binary>=2.9.5",
+    "django-better-admin-arrayfield>=1.4.2",
+    "html2text>=2020.1.16",
+]
+requires-python = ">=3.11"
+license = {text = ""}
+[project.optional-dependencies]
 
 [build-system]
-requires = ["pdm-pep517"]
+requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
 
-
-[tool]
 [tool.pdm]
-[[tool.pdm.source]]
-url = "https://pypi.python.org/simple"
-verify_ssl = true
-name = "pypi"
-
 [tool.pdm.dev-dependencies]
 dev = [
-    "django-extensions~=3.1",
-    "django-debug-toolbar",
-    "coverage",
-    "coveralls",
-    "flake8",
-    "pytest",
-    "pdbpp",
-    "pytest-django",
-    "pywatchman",
-    "pgcli",
-    "werkzeug",
-    "mypy",
-    "django-stubs",
-    "flake8-mypy",
+    "django-debug-toolbar>=3.7.0",
+    "werkzeug>=2.2.2",
+    "bpython>=0.23",
 ]

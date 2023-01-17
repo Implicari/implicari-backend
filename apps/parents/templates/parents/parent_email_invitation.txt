@@ -1,7 +1,0 @@
-Hola {{ parent|escape }},
-
-"{{ classroom.creator|escape }}" te ha invitado al curso "{{ classroom|escape }}" como apoderado de "{{ student|escape }}". Para ingresa a la plataforma utiliza contraseña "{{ password|escape }}" ingresando al siguiente enlace.
-
-{% block reset_link %}
-Iniciar sesión: {{ base_url }}{% url 'login' %}
-{% endblock %}
