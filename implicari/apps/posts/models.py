@@ -1,10 +1,9 @@
 from django.contrib.auth import get_user_model
-# from django.contrib.postgres.fields import ArrayField
 from django_better_admin_arrayfield.models.fields import ArrayField
 from django.db import models
 from django.db.models.signals import post_save
 
-from implicari.apps.classrooms.models import Classroom
+from implicari.apps.courses.models import Course
 
 from .signals import signal_send_email_post
 
@@ -18,8 +17,8 @@ class Post(models.Model):
         related_name='posts',
         on_delete=models.DO_NOTHING,
     )
-    classroom = models.ForeignKey(
-        to=Classroom,
+    course = models.ForeignKey(
+        to=Course,
         related_name='posts',
         on_delete=models.CASCADE,
     )

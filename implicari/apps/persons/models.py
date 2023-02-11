@@ -8,10 +8,10 @@ User = get_user_model()
 
 
 class AbstractPerson(models.Model):
-    tax_identifier = models.CharField(max_length=255)
+    run = models.CharField(max_length=255)
 
-    first_name = models.CharField('first name', max_length=150)
-    last_name = models.CharField('last name', max_length=150)
+    first_name = models.CharField('nombres', max_length=150)
+    last_name = models.CharField('apellidos', max_length=150)
 
     class Meta:
         abstract = True
@@ -28,6 +28,10 @@ class Parent(AbstractPerson):
         blank=True,
         on_delete=models.SET_NULL,
     )
+
+    class Meta:
+        verbose_name = 'apoderado'
+        verbose_name_plural = 'apoderados'
 
 
 class Student(AbstractPerson):
@@ -50,3 +54,11 @@ class Student(AbstractPerson):
         blank=True,
         related_name='students',
     )
+
+    class Meta:
+        verbose_name = 'estudiante'
+        verbose_name_plural = 'estudiantes'
+        unique_together = (
+            'course',
+            'run',
+        )

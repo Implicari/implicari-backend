@@ -2,7 +2,7 @@ from implicari.config.settings import *
 
 
 SECRET_KEY = 'soy-una-super-secret-key'
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [

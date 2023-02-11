@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
-from classrooms.models import Classroom
+from implicari.apps.courses.models import Course
 
 from .signals import signal_send_email_event
 
@@ -16,7 +16,7 @@ class Event(models.Model):
     id = models.AutoField(primary_key=True)
 
     creator = models.ForeignKey(User, related_name='events', on_delete=models.DO_NOTHING)
-    classroom = models.ForeignKey(Classroom, related_name='events', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='events', on_delete=models.CASCADE)
 
     description = models.CharField(max_length=255)
     message = models.TextField(blank=True, null=True)

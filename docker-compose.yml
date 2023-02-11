@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - $DATABASE_PORT:5432
+    environment:
+      - POSTGRES_DB=$DATABASE_NAME
+      - POSTGRES_USER=$DATABASE_USER
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+
+volumes:
+  postgres:

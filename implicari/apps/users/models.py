@@ -53,6 +53,10 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    class Meta:
+        verbose_name = 'usuario'
+        verbose_name_plural = 'usuarios'
+
     def __repr__(self):
         return f'<{self.__class__.__name__}: {self.email}>'
 

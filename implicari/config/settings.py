@@ -46,18 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.staticfiles',
 
-    # 'implicari.evaluations',
-    # 'implicari.events',
-    # 'implicari.parents',
-    # 'implicari.questions',
-    # 'implicari.students',
-    # 'implicari.courses',
-
     'implicari.apps.users',
-    'implicari.apps.classrooms',
     'implicari.apps.persons',
     'implicari.apps.posts',
-    'implicari.apps.schools',
     'implicari.apps.courses',
 ]
 
