@@ -3,23 +3,12 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
+from rest_framework.authtoken import views
+
 
 urlpatterns: list = [
-    # path('', include('users.urls')),
-    # path('', index, name='index'),
-    # path('', include('events.urls')),
-    # path('', include('parents.urls')),
-    # path('', include('posts.urls')),
-    # path('', include('questions.urls')),
-    # path('', include('students.urls')),
-    # path('', include('evaluations.urls')),
-    # path('', include('django.contrib.auth.urls')),
-    # path('cursos/', include('classrooms.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include('implicari.apps.users.urls')),
+    path('api/', include('implicari.apps.courses.urls')),
 ]
 
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

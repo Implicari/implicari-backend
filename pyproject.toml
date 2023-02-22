@@ -12,8 +12,9 @@ dependencies = [
     "psycopg2-binary>=2.9.5",
     "django-better-admin-arrayfield>=1.4.2",
     "html2text>=2020.1.16",
+    "djangorestframework>=3.14.0",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = {text = ""}
 [project.optional-dependencies]
 
@@ -27,4 +28,5 @@ dev = [
     "django-debug-toolbar>=3.7.0",
     "werkzeug>=2.2.2",
     "bpython>=0.23",
+    "drf-yasg>=1.21.5",
 ]

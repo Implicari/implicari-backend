@@ -21,6 +21,7 @@ ROOT_URLCONF = 'implicari.config.develop.urls'
 INSTALLED_APPS += [
     'django_extensions',
     'debug_toolbar',
+    'drf_yasg',
 ]
 
 

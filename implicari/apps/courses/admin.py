@@ -20,4 +20,5 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
+        'teacher',
     )

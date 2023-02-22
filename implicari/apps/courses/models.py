@@ -1,8 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
 
 
+User = get_user_model()
+
+
 class Course(models.Model):
+
+    teacher = models.ForeignKey(User, on_delete=models.PROTECT, related_name='courses')
 
     name = models.CharField(_('name'), max_length=255)
 
