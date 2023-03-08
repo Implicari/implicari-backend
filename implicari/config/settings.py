@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'implicari.apps.persons',
     'implicari.apps.posts',
     'implicari.apps.courses',
+    'implicari.apps.events',
 ]
 
 

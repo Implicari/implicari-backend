@@ -22,6 +22,7 @@ class Event(models.Model):
     message = models.TextField(blank=True, null=True)
 
     date = models.DateField(_('fecha'))
+    time = models.TimeField()
 
     creation_timestamp = models.DateTimeField(_('creation timestamp'), auto_now_add=True)
     update_timestamp = models.DateTimeField(_('update timestamp'), auto_now=True)
@@ -32,22 +33,7 @@ class Event(models.Model):
         )
 
     def __str__(self):
-        return f'{self.classroom}: {self.description}'
-
-    def get_absolute_url(self):
-        return self.get_update_url()
-
-    def get_delete_url(self):
-        return reverse('event-delete', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
-
-    def get_detail_url(self):
-        return reverse('event-detail', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
-
-    def get_list_url(self):
-        return reverse('event-list', kwargs={'classroom_pk': self.classroom_id})
-
-    def get_update_url(self):
-        return reverse('event-update', kwargs={'classroom_pk': self.classroom_id, 'pk': self.pk})
+        return f'{self.course}: {self.description}'
 
 
 post_save.connect(signal_send_email_event, sender=Event)

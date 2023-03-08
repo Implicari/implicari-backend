@@ -1,9 +1,11 @@
 from django.core import mail
 from django.template.loader import render_to_string
+from django.contrib.auth import get_user_model
 
 from html2text import html2text
 
-from users.models import User
+
+User = get_user_model()
 
 
 def send_email_event(event):
