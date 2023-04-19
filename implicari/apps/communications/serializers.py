@@ -1,0 +1,47 @@
+from rest_framework import serializers
+
+from .models import Message
+
+
+class MessageListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        depth = 1
+        fields = (
+            'id',
+            'sender',
+            'subject',
+            'sent_at',
+        )
+
+
+class MessageDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        depth = 1
+        fields = (
+            'id',
+            'sender',
+            'subject',
+            'body',
+            'sent_at',
+        )
+
+
+class MessageCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = (
+            'id',
+            'course',
+            'sender',
+            'subject',
+            'body',
+            'sent_at',
+        )
+        read_only_fields = (
+            'id',
+            'course',
+            'sender',
+            'sent_at',
+        )

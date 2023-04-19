@@ -6,7 +6,7 @@ from .tasks import send_email_post
 logger = logging.getLogger(__name__)
 
 
-def signal_send_email_post(sender, instance, created, **kwargs):
+def signal_send_message(sender, instance, created, **kwargs):
     if instance.is_sent:
         send_email_post(instance)
     else:

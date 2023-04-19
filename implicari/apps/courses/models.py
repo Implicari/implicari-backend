@@ -12,6 +12,8 @@ class Course(models.Model):
 
     name = models.CharField(_('name'), max_length=255)
 
+    is_archived = models.BooleanField(_('is archived'), default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

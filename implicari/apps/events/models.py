@@ -18,11 +18,12 @@ class Event(models.Model):
     creator = models.ForeignKey(User, related_name='events', on_delete=models.DO_NOTHING)
     course = models.ForeignKey(Course, related_name='events', on_delete=models.CASCADE)
 
-    description = models.CharField(max_length=255)
-    message = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
 
-    date = models.DateField(_('fecha'))
-    time = models.TimeField()
+    date = models.DateField(_('date'))
+    time = models.TimeField(_('time'), null=True, blank=True)
+    canceled = models.BooleanField(_('canceled'), default=False)
 
     creation_timestamp = models.DateTimeField(_('creation timestamp'), auto_now_add=True)
     update_timestamp = models.DateTimeField(_('update timestamp'), auto_now=True)
@@ -33,7 +34,7 @@ class Event(models.Model):
         )
 
     def __str__(self):
-        return f'{self.course}: {self.description}'
+        return f'{self.course}: {self.name}'
 
 
 post_save.connect(signal_send_email_event, sender=Event)

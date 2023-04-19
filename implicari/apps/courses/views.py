@@ -1,8 +1,8 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 
 from implicari.utils.classes import StandardPagination
 
-from .serializers import CourseRetriveSerializer, CourseSerializer
+from .serializers import CourseCreateSerializer, CourseRetriveSerializer, CourseSerializer
 from .models import Course
 
 
@@ -34,3 +34,12 @@ class CourseRetrive(RetrieveAPIView):
 
     queryset = Course.objects.all()
     serializer_class = CourseRetriveSerializer
+
+
+class CourseCreate(CreateAPIView):
+
+    queryset = Course.objects.all()
+    serializer_class = CourseCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(teacher=self.request.user)

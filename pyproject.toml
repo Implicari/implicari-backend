@@ -29,4 +29,5 @@ dev = [
     "werkzeug>=2.2.2",
     "bpython>=0.23",
     "drf-yasg>=1.21.5",
+    "setuptools>=67.6.1",
 ]

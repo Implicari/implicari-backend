@@ -152,8 +152,8 @@ class EventUpdateViewTestCase(StaticLiveServerTestCase):
         message = 'Ipsum'
         date = '2019-06-01'
 
-        assert event.description != description
-        assert event.message != message
+        assert event.name != description
+        assert event.description != message
         assert event.date.isoformat() != date
 
         data = {
@@ -176,8 +176,8 @@ class EventUpdateViewTestCase(StaticLiveServerTestCase):
             fetch_redirect_response=False,
         )
 
-        self.assertEqual(event.description, description)
-        self.assertEqual(event.message, message)
+        self.assertEqual(event.name, description)
+        self.assertEqual(event.description, message)
         self.assertEqual(event.date.isoformat(), date)
 
 
@@ -207,4 +207,4 @@ class EventModelTestCase(StaticLiveServerTestCase):
         self.assertIsNotNone(event.__str__())
         self.assertNotEqual(event.__str__(), "")
         self.assertIn(classroom.name, event.__str__())
-        self.assertIn(event.description, event.__str__())
+        self.assertIn(event.name, event.__str__())

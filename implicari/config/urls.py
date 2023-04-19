@@ -10,5 +10,7 @@ urlpatterns: list = [
     path('admin/', admin.site.urls),
     path('api/', include('implicari.apps.users.urls')),
     path('api/', include('implicari.apps.courses.urls')),
+    path('api/', include('implicari.apps.events.urls')),
+    path('api/', include('implicari.apps.communications.urls')),
 ]
 

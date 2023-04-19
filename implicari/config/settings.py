@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
     'implicari.apps.users',
     'implicari.apps.persons',
-    'implicari.apps.posts',
+    'implicari.apps.communications',
     'implicari.apps.courses',
     'implicari.apps.events',
 ]

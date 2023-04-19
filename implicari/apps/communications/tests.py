@@ -3,9 +3,9 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client
 from django.test import override_settings
 
-from classrooms.models import Classroom
+from implicari.apps.courses.models import Course
 
-from .models import Post
+from .models import Message
 from .tasks import send_email_post
 
 
@@ -15,7 +15,7 @@ User = get_user_model()
 class TasksTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
+        'fixtures/courses.fake.json',
         'fixtures/posts.fake.json',
     ]
 
@@ -24,9 +24,9 @@ class TasksTestCase(StaticLiveServerTestCase):
 
         total_emails = len(mail.outbox)
 
-        post = Post.objects.last()
+        post = Message.objects.last()
         parents = User.objects.distinct().filter(
-            students__classrooms=post.classroom,
+            students__courses=post.course,
         )
 
         send_email_post(post)
@@ -40,15 +40,15 @@ class TasksTestCase(StaticLiveServerTestCase):
         total_emails = len(mail.outbox)
 
         with self.assertRaises(Exception):
-            send_email_post(Post.objects.last())
+            send_email_post(Message.objects.last())
 
         self.assertEqual(len(mail.outbox), total_emails)
 
 
-class PostListViewTestCase(StaticLiveServerTestCase):
+class MessageListViewTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
+        'fixtures/courses.fake.json',
     ]
 
     def test_get(self):
@@ -59,10 +59,10 @@ class PostListViewTestCase(StaticLiveServerTestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class PostCreateViewTestCase(StaticLiveServerTestCase):
+class MessageCreateViewTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
+        'fixtures/courses.fake.json',
     ]
 
     def test_get(self):
@@ -78,7 +78,7 @@ class PostCreateViewTestCase(StaticLiveServerTestCase):
         client = Client()
         client.force_login(user)
 
-        self.assertTrue(not Post.objects.exists())
+        self.assertTrue(not Message.objects.exists())
 
         data = {
             'subject': 'Lorem',
@@ -87,19 +87,19 @@ class PostCreateViewTestCase(StaticLiveServerTestCase):
 
         response = client.post('/cursos/1/mensajes/crear/', data, secure=True)
 
-        self.assertEqual(Post.objects.count(), 1)
+        self.assertEqual(Message.objects.count(), 1)
 
         self.assertRedirects(
             response,
-            f'/cursos/1/mensajes/{Post.objects.get().id}/',
+            f'/cursos/1/mensajes/{Message.objects.get().id}/',
             fetch_redirect_response=False,
         )
 
 
-class PostDetailViewTestCase(StaticLiveServerTestCase):
+class MessageDetailViewTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
+        'fixtures/courses.fake.json',
         'fixtures/posts.fake.json',
     ]
 
@@ -116,28 +116,28 @@ class PostDetailViewTestCase(StaticLiveServerTestCase):
         client = Client()
         client.force_login(User.objects.get(email=email))
 
-        classroom = Classroom.objects.create(
+        course = Course.objects.create(
             creator=User.objects.exclude(email=email).first(),
             name='Lorem Ipsum',
         )
 
-        response = client.get(f'/cursos/{classroom.id}/mensajes/1/', secure=True)
+        response = client.get(f'/cursos/{course.id}/mensajes/1/', secure=True)
 
         self.assertEqual(response.status_code, 403)
 
 
-class PostModelTestCase(StaticLiveServerTestCase):
+class MessageModelTestCase(StaticLiveServerTestCase):
     fixtures = [
         'fixtures/users.fake.json',
-        'fixtures/classrooms.fake.json',
+        'fixtures/courses.fake.json',
         'fixtures/posts.fake.json',
     ]
 
     def test_pending_manager(self):
-        Post.objects.filter(id=1).update(is_sent=False)
+        Message.objects.filter(id=1).update(is_sent=False)
 
-        posts = Post.objects.all()
-        posts_pendings = Post.pendings.all()
+        posts = Message.objects.all()
+        posts_pendings = Message.pendings.all()
         posts_completed = posts.exclude(id__in=posts_pendings)
 
         self.assertTrue(posts.exists())
@@ -153,11 +153,11 @@ class PostModelTestCase(StaticLiveServerTestCase):
             self.assertTrue(post.is_sent)
 
     def test_to_string(self):
-        post = Post.objects.first()
+        post = Message.objects.first()
 
-        classroom = post.classroom
+        course = post.course
 
         self.assertIsNotNone(post.__str__())
         self.assertNotEqual(post.__str__(), "")
-        self.assertIn(classroom.name, post.__str__())
+        self.assertIn(course.name, post.__str__())
         self.assertIn(post.subject, post.__str__())

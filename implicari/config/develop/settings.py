@@ -7,6 +7,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'implicari.localhost',
+    'localhost',
 ]
 
 INTERNAL_IPS = [
