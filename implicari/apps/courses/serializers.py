@@ -32,3 +32,16 @@ class CourseRetriveSerializer(serializers.ModelSerializer):
         model = Course
         fields = '__all__'
         depth = 1
+
+
+class CourseUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Course
+        fields = '__all__'
+        read_only_fields = (
+            'id',
+            'teacher',
+            'created_at',
+            'updated_at',
+        )

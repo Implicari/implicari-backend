@@ -192,11 +192,13 @@ REST_FRAMEWORK = {
 
 # Email
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
-EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[Implicari]')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT', 25)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', True)
+EMAIL_SUBJECT_PREFIX = config('EMAIL_SUBJECT_PREFIX', '[Implicari]')

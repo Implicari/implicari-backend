@@ -2,40 +2,35 @@ from django.core import mail
 from django.template.loader import render_to_string
 
 from html2text import html2text
+from implicari.apps.persons.models import Parent
 
 from implicari.apps.users.models import User
 
 
-def send_email_post(post):
-    try:
-        parents = User.objects.distinct().filter(
-            students__classrooms=post.classroom,
-            email__isnull=False,
+def send_email_message(message):
+
+    parents = Parent.objects.distinct().filter(
+        students__course=message.course,
+        user__isnull=False,
+    )
+
+    emails = []
+    subject = f'{message.course}: {message.subject}'
+    content_html = render_to_string('comunications/email.html', {'post': message})
+    content_text = html2text(message.body.replace('<p><br></p>', ''))
+
+    for parent in parents:
+        email = mail.EmailMultiAlternatives(
+            subject,
+            content_text,
+            message.sender.email,
+            [parent.user.email],
         )
+        email.attach_alternative(content_html, 'text/html')
+        emails.append(email)
 
-        messages = []
-        subject = f'{post.classroom}: {post.subject}'
-        content_html = render_to_string('posts/post_email.html', {'post': post})
-        content_text = html2text(post.message.replace('<p><br></p>', ''))
+    connection = mail.get_connection(fail_silently=False)
+    connection.send_messages(emails)
 
-        for parent in parents:
-            message = mail.EmailMultiAlternatives(
-                subject,
-                content_text,
-                post.creator.email,
-                [parent.email],
-            )
-            message.attach_alternative(content_html, 'text/html')
-            messages.append(message)
-
-        connection = mail.get_connection(fail_silently=False)
-        connection.send_messages(messages)
-
-        post.is_sent = True
-        post.save()
-
-    except Exception as e:
-        post.is_sent = False
-        post.save()
-
-        raise e
+    message.is_email_sent = True
+    message.save()

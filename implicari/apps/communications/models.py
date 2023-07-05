@@ -14,10 +14,13 @@ class Message(models.Model):
 
     subject = models.CharField(max_length=100)
     body = models.TextField()
-    sent_at = models.DateTimeField(auto_now_add=True)
+
+    is_email_sent = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-sent_at']
+        ordering = ['-created_at']
         verbose_name = 'mensaje'
         verbose_name_plural = 'mensajes'
 

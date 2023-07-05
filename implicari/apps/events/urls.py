@@ -13,7 +13,7 @@ urlpatterns = [
     path(f'{prefix}/', EventListView.as_view()),
     path(f'{prefix}/upcoming/', EventUpcomingView.as_view()),
     path(f'{prefix}/create/', EventCreateView.as_view()),
-    path(f'{prefix}/<int:pk>/', EventDetailView.as_view()),
+    path(f'events/<int:pk>/', EventDetailView.as_view()),
     path(f'{prefix}/<int:pk>/edit/', EventUpdateView.as_view()),
     path(f'{prefix}/<int:pk>/cancel/', EventCancelView.as_view()),
 ]

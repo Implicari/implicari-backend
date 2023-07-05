@@ -1,8 +1,8 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
 
 from implicari.utils.classes import StandardPagination
 
-from .serializers import CourseCreateSerializer, CourseRetriveSerializer, CourseSerializer
+from .serializers import CourseCreateSerializer, CourseRetriveSerializer, CourseSerializer, CourseUpdateSerializer
 from .models import Course
 
 
@@ -27,7 +27,7 @@ class CourseParentList(ListAPIView):
     serializer_class = CourseSerializer
 
     def get_queryset(self):
-        return Course.objects.filter(students__parents__user=self.request.user)
+        return Course.objects.distinct().filter(students__parents__user=self.request.user)
 
 
 class CourseRetrive(RetrieveAPIView):
@@ -43,3 +43,9 @@ class CourseCreate(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(teacher=self.request.user)
+
+
+class CourseUpdate(UpdateAPIView):
+
+    queryset = Course.objects.all()
+    serializer_class = CourseUpdateSerializer

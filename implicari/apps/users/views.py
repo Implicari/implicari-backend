@@ -1,13 +1,21 @@
 from rest_framework import parsers, renderers
 from rest_framework.authtoken.models import Token
 from rest_framework.compat import coreapi, coreschema
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.schemas import ManualSchema
 from rest_framework.schemas import coreapi as coreapi_schema
 from rest_framework.views import APIView
 
 from .models import User
-from .serializers import AuthTokenSerializer
+from .serializers import AuthTokenSerializer, UserProfileSerializer
+
+
+class UserProfileView(RetrieveAPIView):
+    serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        return self.request.user
 
 
 class ObtainAuthToken(APIView):

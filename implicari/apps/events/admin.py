@@ -8,6 +8,17 @@ class EventAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
+        'name',
         'description',
         'course',
+        'date',
+        'time',
+    )
+
+    list_editable = (
+        'name',
+        'description',
+        'course',
+        'date',
+        'time',
     )

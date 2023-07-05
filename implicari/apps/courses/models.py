@@ -6,6 +6,17 @@ from django.utils.translation import gettext as _
 User = get_user_model()
 
 
+class CourseManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_archived=False)
+    
+
+class CourseArchivedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_archived=True)
+    
+
+
 class Course(models.Model):
 
     teacher = models.ForeignKey(User, on_delete=models.PROTECT, related_name='courses')
@@ -16,6 +27,9 @@ class Course(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = CourseManager()
+    archived = CourseArchivedManager()
 
     def __str__(self):
         return self.name

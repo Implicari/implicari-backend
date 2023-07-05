@@ -6,7 +6,7 @@ from django.test import override_settings
 from implicari.apps.courses.models import Course
 
 from .models import Message
-from .tasks import send_email_post
+from .tasks import send_email_message
 
 
 User = get_user_model()
@@ -29,7 +29,7 @@ class TasksTestCase(StaticLiveServerTestCase):
             students__courses=post.course,
         )
 
-        send_email_post(post)
+        send_email_message(post)
 
         self.assertEqual(len(mail.outbox) - total_emails, parents.count())
 
@@ -40,7 +40,7 @@ class TasksTestCase(StaticLiveServerTestCase):
         total_emails = len(mail.outbox)
 
         with self.assertRaises(Exception):
-            send_email_post(Message.objects.last())
+            send_email_message(Message.objects.last())
 
         self.assertEqual(len(mail.outbox), total_emails)
 

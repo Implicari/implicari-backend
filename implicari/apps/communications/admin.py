@@ -6,8 +6,16 @@ from .models import Message
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
     list_display = (
+        'subject',
         'course',
         'sender',
-        'subject',
-        'sent_at',
+        'is_email_sent',
+        'created_at',
+    )
+
+    list_filter = (
+        'course',
+        'sender',
+        'is_email_sent',
+        'created_at',
     )

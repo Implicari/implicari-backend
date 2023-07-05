@@ -9,14 +9,14 @@ class MessageListView(ListAPIView):
 
     def get_queryset(self):
         return Message.objects.filter(course=self.kwargs['course_id'])
-    
+
 
 class MessageDetailView(RetrieveAPIView):
     serializer_class = MessageDetailSerializer
 
     def get_queryset(self):
-        return Message.objects.filter(course=self.kwargs['course_id'])
-    
+        return Message.objects.all()
+
 
 class MessageCreateView(CreateAPIView):
     serializer_class = MessageCreateSerializer

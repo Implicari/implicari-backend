@@ -1,10 +1,11 @@
 from datetime import date
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
 
 from .models import Event
 from .serializers import (
     EventCancelSerializer,
     EventCreateSerializer,
+    EventDetailSerializer,
     EventListSerializer,
     EventUpdateSerializer,
 )
@@ -23,8 +24,8 @@ class EventUpcomingView(EventListView):
         return super().get_queryset().filter(date__gte=date.today())
 
 
-class EventDetailView(ListAPIView):
-    serializer_class = EventListSerializer
+class EventDetailView(RetrieveAPIView):
+    serializer_class = EventDetailSerializer
     queryset = Event.objects.all()
 
     def get_queryset(self):

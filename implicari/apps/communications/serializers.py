@@ -11,7 +11,7 @@ class MessageListSerializer(serializers.ModelSerializer):
             'id',
             'sender',
             'subject',
-            'sent_at',
+            'created_at',
         )
 
 
@@ -24,7 +24,7 @@ class MessageDetailSerializer(serializers.ModelSerializer):
             'sender',
             'subject',
             'body',
-            'sent_at',
+            'created_at',
         )
 
 
@@ -37,11 +37,11 @@ class MessageCreateSerializer(serializers.ModelSerializer):
             'sender',
             'subject',
             'body',
-            'sent_at',
+            'created_at',
         )
         read_only_fields = (
             'id',
             'course',
             'sender',
-            'sent_at',
+            'created_at',
         )

@@ -12,5 +12,6 @@ urlpatterns: list = [
     path('api/', include('implicari.apps.courses.urls')),
     path('api/', include('implicari.apps.events.urls')),
     path('api/', include('implicari.apps.communications.urls')),
+    path('api/', include('implicari.apps.persons.urls')),
 ]
 
